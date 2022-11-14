@@ -1,2 +1,2 @@
-# askhubrepos01
-my_first_repos
+# QA_QC_Tests
+repository for test case, test plan, test reports
