@@ -1,0 +1,236 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "aero.s7.jl.autotest.ui.SeatRuleTest#newSeatRuleWithTwoMembers()",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "aero.s7.jl.autotest.ui.SeatRuleTest",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_3620 { 
+   	label=s7
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_107891020 { 
+   	label=jl
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   subgraph cluster_1342945425 { 
+   	label=SeatRuleTest
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0[
+	label="+ newSeatRuleWithTwoMembers()"
+	style=filled
+	fillcolor=white
+	tooltip="SeatRuleTest
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_1611793064 { 
+   	label=TestBase
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   TestBase635845705XXXisChapterPresent1808118735[
+	label="+ isChapterPresent()"
+	style=filled
+	fillcolor=white
+	tooltip="TestBase
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_2103950416 { 
+   	label=SeatRuleManager
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   SeatRuleManager363134990XXXaddMember1808118735[
+	label="+ addMember()"
+	style=filled
+	fillcolor=white
+	tooltip="SeatRuleManager
+
+null"
+	fontcolor=darkgreen
+];
+
+SeatRuleManager363134990XXXbutton1808118735[
+	label="+ button()"
+	style=filled
+	fillcolor=white
+	tooltip="SeatRuleManager
+
+null"
+	fontcolor=darkgreen
+];
+
+SeatRuleManager363134990XXXdateForm2013066710[
+	label="+ dateForm()"
+	style=filled
+	fillcolor=white
+	tooltip="SeatRuleManager
+
+null"
+	fontcolor=darkgreen
+];
+
+SeatRuleManager363134990XXXlistBox2013066710[
+	label="+ listBox()"
+	style=filled
+	fillcolor=white
+	tooltip="SeatRuleManager
+
+null"
+	fontcolor=darkgreen
+];
+
+SeatRuleManager363134990XXXlistBoxMulti1821828024[
+	label="+ listBoxMulti()"
+	style=filled
+	fillcolor=white
+	tooltip="SeatRuleManager
+
+null"
+	fontcolor=darkgreen
+];
+
+SeatRuleManager363134990XXXtextForm2013066710[
+	label="+ textForm()"
+	style=filled
+	fillcolor=white
+	tooltip="SeatRuleManager
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_216944365 { 
+   	label=Helper
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Helper635845705XXXwait104431[
+	label="+ wait()"
+	style=filled
+	fillcolor=white
+	tooltip="Helper
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+} 
+
+'edges    
+SeatRuleManager363134990XXXaddMember1808118735 -> Helper635845705XXXwait104431;
+SeatRuleManager363134990XXXdateForm2013066710 -> Helper635845705XXXwait104431;
+SeatRuleManager363134990XXXlistBox2013066710 -> Helper635845705XXXwait104431;
+SeatRuleManager363134990XXXlistBoxMulti1821828024 -> Helper635845705XXXwait104431;
+SeatRuleManager363134990XXXtextForm2013066710 -> Helper635845705XXXwait104431;
+SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0 -> Helper635845705XXXwait104431;
+SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0 -> SeatRuleManager363134990XXXaddMember1808118735;
+SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0 -> SeatRuleManager363134990XXXbutton1808118735;
+SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0 -> SeatRuleManager363134990XXXdateForm2013066710;
+SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0 -> SeatRuleManager363134990XXXlistBox2013066710;
+SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0 -> SeatRuleManager363134990XXXlistBoxMulti1821828024;
+SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0 -> SeatRuleManager363134990XXXtextForm2013066710;
+SeatRuleTest363134990XXXnewSeatRuleWithTwoMembers0 -> TestBase635845705XXXisChapterPresent1808118735;
+    
+}
+@enduml

@@ -1,0 +1,407 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "aero.s7.jl.autotest.api.ApiTest",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_3620 { 
+   	label=s7
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_107891020 { 
+   	label=jl
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   ApiTest1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ApiTest</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   documentsPackingService: DocumentsPackingService [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   seatRuleService: SeatRuleService [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ testCreateDocumentWithRule()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testCreateNewSeatRuleWithoutTask()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testCreateSeatRuleWithTasks()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testDeleteSeatRule()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testGetDocumentById()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testGetSeatRuleById()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testUpdateSeatRuleTask()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ testUpdateSeatRuleWithoutTask()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+DocRuleCreateForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)DocRuleCreateForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ newDocRule(): DocRuleCreateForm</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+DocumentsPackingBaseForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)DocumentsPackingBaseForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   aircraftId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   airlineId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   arrAirports: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   authorFullName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   authorId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   authorName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   board: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   capCY: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   copies: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   countryArrId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   countryDepId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   createDate: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   crewRouteCategoryId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   crewType: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   dateEnd: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   dateStart: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   depAirports: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   description: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docCategoryId: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docFile: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docFileId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docOwnerIds: List&lt;Integer&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docRulesIds: List&lt;Integer&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docTemplateId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docTemplateParamsIds: List&lt;Integer&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   docType: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   flightNumbers: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   flightType: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   isActive: Boolean [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   modifyAuthorFullName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   modifyAuthorId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   modifyDate: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   prevDocId: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   routeType: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   rule: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   sortIndex: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   technicalStop: Boolean [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   validityPeriodEnd: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   validityPeriodStart: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   whitePage: Boolean [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+DocumentsPackingCreateForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)DocumentsPackingCreateForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ newDoc(): DocumentsPackingCreateForm</TD></TR>
+<TR><TD ALIGN="LEFT" >+ newDocWithRule(): DocumentsPackingCreateForm</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+DocumentsPackingServiceImpl1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)DocumentsPackingServiceImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ createDocument(form: DocumentsPackingCreateForm): DocumentsPacking</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createDocumentWithRule(form: DocumentsPackingWithDocRuleCreateForm): DocumentsPacking</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteDocument(id: int): DocumentsPacking</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDocRule(docId: int): DocRule</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDocument(id: int): DocumentsPacking</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchDocument(): List&lt;DocumentsPacking&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateDocument(form: DocumentsPackingUpdateForm): DocumentsPacking</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+DocumentsPackingUpdateForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)DocumentsPackingUpdateForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   id: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ updateDocument(id: int): DocumentsPackingUpdateForm</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+DocumentsPackingWithDocRuleCreateForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)DocumentsPackingWithDocRuleCreateForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   docRuleCreateForms: List&lt;DocRuleCreateForm&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   documentsPackingCreateForm: DocumentsPackingCreateForm [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ newDocWithRule(): DocumentsPackingWithDocRuleCreateForm</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Helper635845705[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Helper</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ element(list: List&lt;Integer&gt;, index: int): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ jsonValue(jsonString: String, key: String): Object</TD></TR>
+<TR><TD ALIGN="LEFT" >+ wait(mills: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SeatRuleBaseForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SeatRuleBaseForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+   actypeId: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   authorFullName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   authorId: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   capCY: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   carrierId: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   code: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   createDate: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   crewCategoryIds: List&lt;Integer&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   crewMemberType: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   crewPosId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   isActive: Boolean [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   isAdditional: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   isTemplate: Boolean [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   qualificationIds: List&lt;Integer&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   role: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   subTask: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   taskId: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   taskToSeatRuleIDs: Object[] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   type: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   validityEnd: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   validityStart: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SeatRuleCreateForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SeatRuleCreateForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ newSeatRule(): SeatRuleCreateForm</TD></TR>
+<TR><TD ALIGN="LEFT" >+ newSeatRuleWithTask(): SeatRuleCreateForm</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SeatRuleServiceImpl1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SeatRuleServiceImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ createSeatRule(form: SeatRuleCreateForm): SeatRule</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createSeatRuleWithTask(form: SeatRuleWithTaskToSeatRuleCreateForm): SeatRule</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteSeatRule(id: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ exists(id: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getSeatRule(id: int): SeatRule</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getTaskToSeatRule(id: int): TaskToSeatRule</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchSeatRule(): List&lt;SeatRule&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateSeatRule(form: SeatRuleUpdateForm): SeatRule</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateTaskToSeatRule(form: SeatRuleUpdateForm): TaskToSeatRule</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SeatRuleUpdateForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SeatRuleUpdateForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   id: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ updateSeatRule(id: int): SeatRuleUpdateForm</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateTaskToSeatRule(taskId: int): SeatRuleUpdateForm</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SeatRuleWithTaskToSeatRuleCreateForm1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SeatRuleWithTaskToSeatRuleCreateForm</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   seatRuleCreateForm: SeatRuleCreateForm [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   taskToSeatRuleCreateFroms: List&lt;TaskToSeatRuleCreateFrom&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ newTaskToSeatRule(): SeatRuleWithTaskToSeatRuleCreateForm</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TaskToSeatRuleCreateFrom1627698300[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TaskToSeatRuleCreateFrom</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ newTaskToSeatRule(): TaskToSeatRuleCreateFrom</TD></TR>
+<TR><TD ALIGN="LEFT" >+ newTaskToSeatRule2(): TaskToSeatRuleCreateFrom</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+TestBase635845705[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TestBase</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ authToken(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ closeSessionChrome()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ headerLink(chapter: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+ApiTest1627698300 -> DocumentsPackingServiceImpl1627698300[arrowhead=none];
+ApiTest1627698300 -> DocumentsPackingWithDocRuleCreateForm1627698300[label="testCreateDocumentWithRule() -> newDocWithRule()"];
+ApiTest1627698300 -> SeatRuleServiceImpl1627698300[arrowhead=none];
+DocumentsPackingBaseForm1627698300 -> DocRuleCreateForm1627698300[arrowhead=none, arrowtail=empty, dir=both];
+DocumentsPackingBaseForm1627698300 -> DocumentsPackingCreateForm1627698300[arrowhead=none, arrowtail=empty, dir=both];
+DocumentsPackingBaseForm1627698300 -> DocumentsPackingUpdateForm1627698300[arrowhead=none, arrowtail=empty, dir=both];
+DocumentsPackingBaseForm1627698300 -> DocumentsPackingWithDocRuleCreateForm1627698300[arrowhead=none, arrowtail=empty, dir=both];
+DocumentsPackingWithDocRuleCreateForm1627698300 -> DocRuleCreateForm1627698300[label="docRuleCreateForms
+[0..*]"];
+DocumentsPackingWithDocRuleCreateForm1627698300 -> DocumentsPackingCreateForm1627698300[label="documentsPackingCreateForm
+[0..1]"];
+SeatRuleBaseForm1627698300 -> SeatRuleCreateForm1627698300[arrowhead=none, arrowtail=empty, dir=both];
+SeatRuleBaseForm1627698300 -> SeatRuleUpdateForm1627698300[arrowhead=none, arrowtail=empty, dir=both];
+SeatRuleBaseForm1627698300 -> SeatRuleWithTaskToSeatRuleCreateForm1627698300[arrowhead=none, arrowtail=empty, dir=both];
+SeatRuleBaseForm1627698300 -> TaskToSeatRuleCreateFrom1627698300[arrowhead=none, arrowtail=empty, dir=both];
+SeatRuleWithTaskToSeatRuleCreateForm1627698300 -> SeatRuleCreateForm1627698300[label="seatRuleCreateForm
+[0..1]"];
+SeatRuleWithTaskToSeatRuleCreateForm1627698300 -> TaskToSeatRuleCreateFrom1627698300[label="taskToSeatRuleCreateFroms
+[0..*]"];
+TestBase635845705 -> ApiTest1627698300[arrowhead=none, arrowtail=empty, dir=both];
+    
+}
+@enduml
