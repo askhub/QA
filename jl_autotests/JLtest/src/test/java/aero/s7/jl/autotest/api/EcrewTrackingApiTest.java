@@ -1,3 +1,4 @@
+// Автотесты API раздела Ecrew tracking. Korotchenko AS. 2023
 package aero.s7.jl.autotest.api;
 
 import aero.s7.jl.autotest.api.EcrewTracking.*;

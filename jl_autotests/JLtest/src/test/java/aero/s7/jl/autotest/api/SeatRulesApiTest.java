@@ -1,6 +1,7 @@
+// Автотесты API раздела Seat rules. Korotchenko AS. 2023
 package aero.s7.jl.autotest.api;
 
-import aero.s7.jl.autotest.api.Dictionary.*;
+import aero.s7.jl.autotest.api.DictionaryAndData.*;
 import aero.s7.jl.autotest.api.Filter.SeatRuleSearch;
 import aero.s7.jl.autotest.api.Filter.SeatRuleSearchBuilder;
 import aero.s7.jl.autotest.api.SeatRules.*;
@@ -25,11 +26,6 @@ public class SeatRulesApiTest extends TestBase {
 
         SeatRule getSeatRule = seatRuleService.getSeatRule(newSeatRule.getId());
         Assert.assertEquals(newSeatRule.getId(), getSeatRule.getId());
-        /*
-        //вариант  через константу
-        SeatRule seatRule = seatRuleService.getSeatRule(Constant.Api.SEAT_RULE_ID);
-        Assert.assertEquals(Constant.Api.SEAT_RULE_ID, seatRule.getId());
-         */
     }
 
     @Test
@@ -49,7 +45,6 @@ public class SeatRulesApiTest extends TestBase {
 
     @Test
     public void testCreateSeatRuleNegative () {
-
         Assert.assertTrue(seatRuleService.createSeatRuleNegative(SeatRuleCreateForm.newSeatRuleWithEmptyField()));
     }
 
@@ -64,15 +59,15 @@ public class SeatRulesApiTest extends TestBase {
 
         Assert.assertEquals(Optional.ofNullable(SeatRuleCreateForm.newSeatRuleWithTask().getCarrierId()),
                 Optional.of(seatRule.getCarrierId()));
-        Assert.assertEquals(Optional.ofNullable(SeatRuleCreateForm.newSeatRuleWithTask().getActypeId()),
+        Assert.assertEquals(Optional.of(SeatRuleCreateForm.newSeatRuleWithTask().getActypeId()),
                 Optional.of(seatRule.getActypeId()));
-        Assert.assertEquals(Optional.ofNullable(SeatRuleCreateForm.newSeatRuleWithTask().getIsActive()),
+        Assert.assertEquals(Optional.of(SeatRuleCreateForm.newSeatRuleWithTask().getIsActive()),
                 Optional.of(seatRule.getIsActive()));
-        Assert.assertEquals(Optional.ofNullable(SeatRuleCreateForm.newSeatRuleWithTask().getIsTemplate()),
+        Assert.assertEquals(Optional.of(SeatRuleCreateForm.newSeatRuleWithTask().getIsTemplate()),
                 Optional.of(seatRule.getIsTemplate()));
-        Assert.assertEquals(Optional.ofNullable(SeatRuleCreateForm.newSeatRuleWithTask().getCrewMemberType()),
+        Assert.assertEquals(Optional.of(SeatRuleCreateForm.newSeatRuleWithTask().getCrewMemberType()),
                 Optional.of(seatRule.getCrewMemberType()));
-        Assert.assertEquals(Optional.ofNullable(SeatRuleCreateForm.newSeatRuleWithTask().getCarrierId()),
+        Assert.assertEquals(Optional.of(SeatRuleCreateForm.newSeatRuleWithTask().getCarrierId()),
                 Optional.of(seatRule.getCarrierId()));
         Assert.assertEquals(Optional.ofNullable(SeatRuleCreateForm.newSeatRuleWithTask().getCapCY()),
                 Optional.ofNullable(seatRule.getCapCY()));
@@ -83,18 +78,18 @@ public class SeatRulesApiTest extends TestBase {
 
         Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getCode(), task1.getCode());
         Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getTaskId(), task1.getTaskId());
-        Assert.assertEquals(Optional.ofNullable(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getSubTask()), Optional.of(task1.getSubTask()));
-        Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getType(), task1.getType());
-        Assert.assertEquals(Optional.ofNullable(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getRole()), Optional.of(task1.getRole()));
-        Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getCrewPosId(), task1.getCrewPosId());
+        //Assert.assertEquals(Optional.of(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getSubTask()), Optional.of(task1.getSubTask()));
+        Assert.assertEquals(Optional.of(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getType()), Optional.of(task1.getType()));
+        Assert.assertEquals(Optional.of(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getRole()), Optional.of(task1.getRole()));
+        Assert.assertEquals(Optional.of(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getCrewPosId()), Optional.of(task1.getCrewPosId()));
         Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getIsAdditional(), task1.getIsAdditional());
 
         Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getCode(), task2.getCode());
         Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getTaskId(), task2.getTaskId());
-        Assert.assertEquals(Optional.ofNullable(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getSubTask()), Optional.of(task2.getSubTask()));
-        Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getType(), task2.getType());
-        Assert.assertEquals(Optional.ofNullable(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getRole()), Optional.of(task2.getRole()));
-        Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getCrewPosId(), task2.getCrewPosId());
+        //Assert.assertEquals(Optional.of(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getSubTask()), Optional.of(task2.getSubTask()));
+        Assert.assertEquals(Optional.of(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getType()), Optional.of(task2.getType()));
+        Assert.assertEquals(Optional.of(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getRole()), Optional.of(task2.getRole()));
+        Assert.assertEquals(Optional.of(TaskToSeatRuleCreateFrom.newTaskToSeatRule2().getCrewPosId()), Optional.of(task2.getCrewPosId()));
         Assert.assertEquals(TaskToSeatRuleCreateFrom.newTaskToSeatRule().getIsAdditional(), task1.getIsAdditional());
     }
 
@@ -339,7 +334,7 @@ public class SeatRulesApiTest extends TestBase {
     }
 
     @Test
-    public void testGetReferenceDataAsCrewMemberType () {
+    public void testGetDataAsCrewMemberType () {
         List<CrewMemberType> crewMemberTypeData = seatRuleService.getCrewMemberType();
         Assert.assertNotNull(crewMemberTypeData);
         Assert.assertTrue(crewMemberTypeData.size()>0);
@@ -350,67 +345,67 @@ public class SeatRulesApiTest extends TestBase {
     }
 
     @Test
-    public void testGetReferenceDataAsCrewCategory () {
-        List<CrewCategory> crewCategoryData = seatRuleService.getCrewCategory();
+    public void testGetDataAsCrewCategory () {
+        List<CrewCategories> crewCategoryData = seatRuleService.getCrewCategory();
         Assert.assertNotNull(crewCategoryData);
         Assert.assertTrue(crewCategoryData.size()>0);
 
-        List<String> crewCategoryList = crewCategoryData.stream().map(CrewCategory::getName).toList();
+        List<String> crewCategoryList = crewCategoryData.stream().map(CrewCategories::getName).toList();
 
         Assert.assertEquals(new HashSet<Object>(crewCategoryList), new HashSet<Object>(Constant.Dictionary.CREW_CATEGORY));
     }
 
     @Test
-    public void testGetReferenceDataAsPosition () {
-        List<Position> positionData = seatRuleService.getPosition();
+    public void testGetDataAsPosition () {
+        List<Positions> positionData = seatRuleService.getPosition();
         Assert.assertNotNull(positionData);
         Assert.assertTrue(positionData.size()>0);
 
-        List<String> positionList = positionData.stream().map(Position::getName).toList();
+        List<String> positionList = positionData.stream().map(Positions::getName).toList();
 
         Assert.assertEquals(new HashSet<Object>(positionList), new HashSet<Object>(Constant.Dictionary.POSITION));
     }
 
     @Test
-    public void testGetReferenceDataAsQualification () {
-        List<Qualification> qualificationData = seatRuleService.getQualification();
+    public void testGetDataAsQualification () {
+        List<Qualifications> qualificationData = seatRuleService.getQualification();
         Assert.assertNotNull(qualificationData);
         Assert.assertTrue(qualificationData.size()>0);
 
-        List<String> qualificationList = qualificationData.stream().map(Qualification::getName).toList();
+        List<String> qualificationList = qualificationData.stream().map(Qualifications::getName).toList();
 
         Assert.assertEquals(new HashSet<Object>(qualificationList), new HashSet<Object>(Constant.Dictionary.QUALIFICATION));
     }
 
     @Test
-    public void testGetReferenceDataAsRole () {
-        List<Role> roleData = seatRuleService.getRole();
+    public void testGetDataAsRole () {
+        List<Roles> roleData = seatRuleService.getRole();
         Assert.assertNotNull(roleData);
         Assert.assertTrue(roleData.size()>0);
 
-        List<String> roleList = roleData.stream().map(Role::getName).toList();
+        List<String> roleList = roleData.stream().map(Roles::getName).toList();
 
         Assert.assertEquals(new HashSet<Object>(roleList), new HashSet<Object>(Constant.Dictionary.ROLE));
     }
 
     @Test
-    public void testGetReferenceDataAsSubTask () {
-        List<SubTask> subTaskData = seatRuleService.getSubtask();
+    public void testGetDataAsSubTask () {
+        List<SubTasks> subTaskData = seatRuleService.getSubtask();
         Assert.assertNotNull(subTaskData);
         Assert.assertTrue(subTaskData.size()>0);
 
-        List<String> subTaskList = subTaskData.stream().map(SubTask::getName).toList();
+        List<String> subTaskList = subTaskData.stream().map(SubTasks::getName).toList();
 
         Assert.assertEquals(new HashSet<Object>(subTaskList), new HashSet<Object>(Constant.Dictionary.SUB_TASK));
     }
 
     @Test
-    public void testGetReferenceDataAsType () {
-        List<Type> typeData = seatRuleService.getMemberType();
+    public void testGetDataAsType () {
+        List<Types> typeData = seatRuleService.getMemberType();
         Assert.assertNotNull(typeData);
         Assert.assertTrue(typeData.size()>0);
 
-        List<String> typeList = typeData.stream().map(Type::getName).toList();
+        List<String> typeList = typeData.stream().map(Types::getName).toList();
 
         Assert.assertEquals(new HashSet<Object>(typeList), new HashSet<Object>(Constant.Dictionary.TYPE));
     }
@@ -439,5 +434,10 @@ public class SeatRulesApiTest extends TestBase {
             seatRuleService.updateTaskToSeatRule(SeatRuleUpdateForm.updateTaskToSeatRule2(firstTask.getId()));
         }
     }
-
 }
+
+        /*
+        //вариант  через константу
+        SeatRule seatRule = seatRuleService.getSeatRule(Constant.Api.SEAT_RULE_ID);
+        Assert.assertEquals(Constant.Api.SEAT_RULE_ID, seatRule.getId());
+         */

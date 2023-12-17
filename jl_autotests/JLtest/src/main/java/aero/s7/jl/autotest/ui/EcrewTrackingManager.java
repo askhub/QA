@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,19 +31,19 @@ public class EcrewTrackingManager {
         Helper.wait(500);
     }
 
-    public void button (String buttonTitle) {
+    public void pushButton(final String buttonTitle) {
         String buttonXpath = String.format("//button[@type='button']//span[contains(text(), '%s')]", buttonTitle);
         this.driver.findElement(By.xpath(buttonXpath)).click();
         //Helper.wait(300);
     }
 
-    public void sortButton (String buttonTitle) {
+    public void sortButton (final String buttonTitle) {
         String buttonXpath = String.format("//button[text()='%s']", buttonTitle);
         this.driver.findElement(By.xpath(buttonXpath)).click();
         Helper.wait(300);
     }
 
-    public void listBox (String listTitle, String listValue) {
+    public void listBox (final String listTitle, final String listValue) {
         String listTitleXpath = null;
         if (Objects.equals("Carrier", listTitle)) {
             listTitleXpath = String.format("//label[@tuilabel='%s']" +
@@ -59,7 +61,7 @@ public class EcrewTrackingManager {
 
     }
 
-    public void dateSearch (String dateTitle, String date) {
+    public void dateSearch (final String dateTitle, final String date) {
         String dateXpath = String.format("//label[@tuilabel='%s']" +
                 "//input[@automation-id='tui-primitive-textfield__native-input']", dateTitle);
         WebElement dateFrm = this.driver.findElement(By.xpath(dateXpath));
@@ -73,7 +75,7 @@ public class EcrewTrackingManager {
         Helper.wait(500);
     }
 
-    public boolean findDocument (String request) {
+    public boolean findDocument (final String request) {
         String requestXpath = String.format("//tr/td[contains(text(), '%s')]" +
                 "/following-sibling::td/button[@title='View']//fa-icon", request);
         return this.driver.findElements(By.xpath(requestXpath)).size() > 0;
@@ -92,7 +94,7 @@ public class EcrewTrackingManager {
         return result;
     }
 
-    public int searchDocByOneField (String request) {
+    public int searchDocByOneField (final String request) {
         List<WebElement> docList;
         int docFound = 0;
         int count = 1;
@@ -118,7 +120,7 @@ public class EcrewTrackingManager {
         return docFound;
     }
 
-    public int searchDocByTwoFields(String first, String second) {
+    public int searchDocByTwoFields(final String first, final String second) {
         List<WebElement> docList;
         int docFound = 0;
         int count = 1;
@@ -143,7 +145,7 @@ public class EcrewTrackingManager {
         return docFound;
     }
 
-    public String dateFormatConverter(String date) {
+    public String dateFormatConverter(final String date) {
         String oldFormat = "ddmmyyyy";
         String newFormat = "dd.mm.yyyy";
 
@@ -158,7 +160,7 @@ public class EcrewTrackingManager {
         return dateFormat.format(d);
     }
 
-    public void airportField (String title, String iata) {
+    public void airportField (final String title, final String iata) {
         String fieldXpath = String.format("//label[@tuilabel='%s']//input[@type='text']", title);
         String valueXpath = String.format("//ng-dropdown-panel//span[contains(text(), '%s')]", iata);
         WebElement field = this.driver.findElement(By.xpath(fieldXpath));
@@ -167,7 +169,7 @@ public class EcrewTrackingManager {
         this.driver.findElement(By.xpath(valueXpath)).click();
     }
 
-    public void sendEmail (String email) {
+    public void sendEmail (final String email) {
         this.driver.findElement(By.xpath("//button[@title='Send mail']//span[@class='t-left ng-star-inserted']")).click();
         this.driver.findElement(By.xpath("//input[@type='email']")).click();
         this.driver.findElement(By.xpath("//input[@type='email']")).sendKeys(email);
@@ -175,7 +177,7 @@ public class EcrewTrackingManager {
         this.driver.findElement(By.xpath("//button[@icon='tuiIconMailLarge']")).click();
     }
 
-    public void downloadFlightTask (String value) {
+    public void downloadFlightTask (final String value) {
         String downloadXpath = "//button[@title='Download']//span";
         boolean isPresent = this.driver.findElements(By.xpath(downloadXpath)).size()>0;
         try {
@@ -224,7 +226,7 @@ public class EcrewTrackingManager {
         return picList;
     }
 
-    public List<String> airportCollect(String columnTitle) {
+    public List<String> airportCollect(final String columnTitle) {
         List<String> airportList = new ArrayList<>();
         String emptyAirportField = null;
         int count = 1;
@@ -260,6 +262,25 @@ public class EcrewTrackingManager {
             }
         } while ((!Objects.equals(emptyAirportField, "")) && Objects.equals(isNextPagePresent, true));
         return airportList;
+    }
+
+    public LocalDate parserDate(final String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return LocalDate.parse(date, formatter);
+    }
+
+    public String getCalendarValue (final String dateTitle) {
+        String dateXpath = null;
+        if (dateTitle.equals("Date from")) {
+            dateXpath = String.format(
+                    "//label[@tuilabel='%s']//input[@automation-id='tui-primitive-textfield__native-input']",
+                    dateTitle);
+        } else if (dateTitle.equals("Date to")){
+            dateXpath = String.format(
+                    "//label[@tuilabel='%s']//input[@automation-id='tui-primitive-textfield__native-input']",
+                    dateTitle);
+        }
+        return this.driver.findElement(By.xpath(dateXpath)).getAttribute("value");
     }
 }
 

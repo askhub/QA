@@ -50,7 +50,7 @@ public class EcrewTrackingServiceImpl implements EcrewTrackingService {
         }
         System.out.println(json);
 
-        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_DEV_URL, TestBase.token));
+        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
         return RestAssured.given()
                 .when()
                     .body(json.toString())
@@ -65,7 +65,7 @@ public class EcrewTrackingServiceImpl implements EcrewTrackingService {
 
     @Override
     public Boolean email(long flightLegId, String email) {
-        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_DEV_URL, TestBase.token));
+        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
         final Response response = RestAssured.given()
             .when()
                 .pathParam("flight_id", flightLegId)
@@ -76,7 +76,7 @@ public class EcrewTrackingServiceImpl implements EcrewTrackingService {
 
     @Override
     public Boolean generateFlightTask (long flightLegId) {
-        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_DEV_URL, TestBase.token));
+        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
         final Response response = RestAssured.given()
                 .when()
                 .pathParam("flightLegId", flightLegId)
@@ -86,7 +86,7 @@ public class EcrewTrackingServiceImpl implements EcrewTrackingService {
 
     @Override
     public Boolean getGeneratedFlightTask(long flightLegId) {
-        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_DEV_URL, TestBase.token));
+        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
         final Response response = RestAssured.given()
                 .when()
                 .pathParam("flight-id", flightLegId)
@@ -96,7 +96,7 @@ public class EcrewTrackingServiceImpl implements EcrewTrackingService {
 
     @Override
     public List<EcrewTrackingAllFlightTaskByFlightLeg> getAllFlightTaskByFlightLeg(long flightLegId) {
-        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_DEV_URL, TestBase.token));
+        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
         return Collections.singletonList(RestAssured.given()
                 .when()
                 .pathParam("flight_Leg_Id", flightLegId)
@@ -109,7 +109,7 @@ public class EcrewTrackingServiceImpl implements EcrewTrackingService {
 
     @Override
     public EcrewTrackingFlightTaskData getFlightTaskData(long flightTaskId) {
-        Specifications.setupRequestSpecification(Specifications.requestSpecification(Constant.BASE_DEV_URL, TestBase.token));
+        Specifications.setupRequestSpecification(Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
         return RestAssured.given()
                 .when()
                     .pathParam("flight_Task_Id", flightTaskId)
@@ -124,7 +124,7 @@ public class EcrewTrackingServiceImpl implements EcrewTrackingService {
     public boolean updateFlightTask(long flightLegId, EcrewTrackingFlightTaskDataUpdate ecrewTrackingFlightTaskDataUpdate) {
         JSONObject json = new JSONObject();
         // сюда поля для изменения ПЗ
-        Specifications.setupRequestSpecification(Specifications.requestSpecification(Constant.BASE_DEV_URL, TestBase.token));
+        Specifications.setupRequestSpecification(Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
         Response response = RestAssured.given()
                 .when()
                 .pathParam("flightLegId", flightLegId)

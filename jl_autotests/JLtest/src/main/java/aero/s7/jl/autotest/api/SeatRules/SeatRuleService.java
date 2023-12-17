@@ -1,8 +1,7 @@
 package aero.s7.jl.autotest.api.SeatRules;
 
-import aero.s7.jl.autotest.api.Dictionary.*;
+import aero.s7.jl.autotest.api.DictionaryAndData.*;
 import aero.s7.jl.autotest.api.Filter.SeatRuleSearch;
-import io.restassured.response.ValidatableResponse;
 
 import java.util.List;
 
@@ -21,11 +20,11 @@ public interface SeatRuleService {
     boolean deleteTaskToSeatRule (int taskId);
     boolean exists (int id);
     List<CrewMemberType> getCrewMemberType ();
-    List<CrewCategory> getCrewCategory ();
-    List<Position> getPosition ();
-    List<Qualification> getQualification ();
-    List<SubTask> getSubtask ();
-    List<Type> getMemberType();
-    List<Role> getRole ();
+    List<CrewCategories> getCrewCategory ();
+    List<Positions> getPosition ();
+    List<Qualifications> getQualification ();
+    List<SubTasks> getSubtask ();
+    List<Types> getMemberType();
+    List<Roles> getRole ();
 
 }

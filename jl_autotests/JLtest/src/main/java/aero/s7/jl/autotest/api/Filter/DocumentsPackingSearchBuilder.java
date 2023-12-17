@@ -23,6 +23,7 @@ public class DocumentsPackingSearchBuilder {
     Integer crewRouteCategoryId;
     Boolean isTechnicalStop;
     Boolean isActive;
+    Boolean replaceWhitePage;
 
     public DocumentsPackingSearchBuilder(Boolean isActive) {
         this.isActive = isActive;
@@ -120,6 +121,11 @@ public class DocumentsPackingSearchBuilder {
 
     public DocumentsPackingSearchBuilder setTechnicalStop(Boolean isTechnicalStop) {
         this.isTechnicalStop = isTechnicalStop;
+        return this;
+    }
+
+    public DocumentsPackingSearchBuilder setReplaceWhitePage (Boolean replaceWhitePage) {
+        this.replaceWhitePage = replaceWhitePage;
         return this;
     }
 

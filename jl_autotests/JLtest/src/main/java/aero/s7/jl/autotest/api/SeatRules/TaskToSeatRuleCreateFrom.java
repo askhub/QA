@@ -9,7 +9,7 @@ public class TaskToSeatRuleCreateFrom extends SeatRuleBaseForm {
 
         task.setCode("&");
         task.setTaskId("T20.1");
-        task.setSubTask(1);
+        //task.setSubTask(1);
         task.setType(1);
         task.setQualificationIds(Collections.singletonList(2));
         task.setRole(2);
@@ -24,7 +24,7 @@ public class TaskToSeatRuleCreateFrom extends SeatRuleBaseForm {
 
         task2.setCode("z");
         task2.setTaskId("T20.1");
-        task2.setSubTask(2);
+        //task2.setSubTask(2);
         task2.setType(2);
         task2.setQualificationIds(Collections.singletonList(3));
         task2.setRole(1);
@@ -170,7 +170,7 @@ public class TaskToSeatRuleCreateFrom extends SeatRuleBaseForm {
 
         task.setCode("&f");
         task.setTaskId("T19.1");
-        task.setSubTask(2);
+        //task.setSubTask(2);
         task.setType(2);
         task.setQualificationIds(Collections.singletonList(4));
         task.setRole(1);
@@ -185,7 +185,7 @@ public class TaskToSeatRuleCreateFrom extends SeatRuleBaseForm {
 
         task.setCode("f");
         task.setTaskId("T20.1");
-        task.setSubTask(1);
+        //task.setSubTask(1);
         task.setType(2);
         task.setQualificationIds(Collections.singletonList(4));
         task.setRole(1);
@@ -200,7 +200,7 @@ public class TaskToSeatRuleCreateFrom extends SeatRuleBaseForm {
 
         task.setCode("H");
         task.setTaskId("T20.1");
-        task.setSubTask(2);
+        //task.setSubTask(2);
         task.setType(1);
         task.setQualificationIds(Collections.singletonList(2));
         task.setRole(2);
@@ -215,7 +215,7 @@ public class TaskToSeatRuleCreateFrom extends SeatRuleBaseForm {
 
         task.setCode("k");
         task.setTaskId("T20.1");
-        task.setSubTask(null);
+        //task.setSubTask(null);
         task.setType(2);
         task.setQualificationIds(Collections.singletonList(5));
         task.setRole(null);
@@ -230,7 +230,7 @@ public class TaskToSeatRuleCreateFrom extends SeatRuleBaseForm {
 
         task.setCode("k");
         task.setTaskId("T22.1");
-        task.setSubTask(null);
+        //task.setSubTask(null);
         task.setType(2);
         task.setQualificationIds(Collections.singletonList(5));
         task.setRole(1);
@@ -245,7 +245,7 @@ public class TaskToSeatRuleCreateFrom extends SeatRuleBaseForm {
 
         task.setCode("G");
         task.setTaskId("T22.1");
-        task.setSubTask(3);
+        //task.setSubTask(3);
         task.setType(1);
         task.setQualificationIds(Collections.singletonList(5));
         task.setRole(2);

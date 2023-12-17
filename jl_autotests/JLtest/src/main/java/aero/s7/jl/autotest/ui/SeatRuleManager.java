@@ -9,6 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SeatRuleManager {
@@ -25,15 +30,13 @@ public class SeatRuleManager {
         String addMemberXpath = null;
         if (typeMember.equals("general")) {
             addMemberXpath = "(//div[@class='form-section'][1])" + addMemberButtonXpath;
-
         } else if (typeMember.equals("additional")) {
             addMemberXpath = "(//div[@class='form-section'][2])" + addMemberButtonXpath;
-
         }
         this.driver.findElement(By.xpath(addMemberXpath)).click();
 
         this.index++;
-        Helper.wait(1000);
+        Helper.wait(500);
     }
 
     public int resetIndex () {
@@ -42,7 +45,7 @@ public class SeatRuleManager {
 
     public void listBox (final String listTitle, final String listValue) {
         String listTitleXpath;
-        if (List.of("Crew", "Type", "Carrier", "Aircraft", "Subtask", "Role", "Position").contains(listTitle)) {
+        if (List.of("Crew", "Type", "Carrier", "Aircraft", "Role", "Position", "Airline").contains(listTitle)) {
             listTitleXpath = String.format("(//label[@tuilabel='%s']//input[@automation-id='tui-primitive-textfield__native-input'])[%s]", listTitle, this.index);
         }
         else {
@@ -91,7 +94,15 @@ public class SeatRuleManager {
         WebElement txtFrm = this.driver.findElement(By.xpath(formXpath));
         txtFrm.click();
         txtFrm.sendKeys(searchText);
-        Helper.wait(1000);
+        Helper.wait(500);
+    }
+
+    public void textSearchForm (final String fieldTitle, final String searchText) {
+        String formXpath = String.format("(//label[@tuilabel='%s']//input[@type='text'])[%d]", fieldTitle, this.index);
+        WebElement txtFrm = this.driver.findElement(By.xpath(formXpath));
+        txtFrm.click();
+        txtFrm.sendKeys(searchText);
+        Helper.wait(500);
     }
 
     public void textFormUpdate(final String nameForm, final String searchText, final int taskIndex) {
@@ -105,10 +116,10 @@ public class SeatRuleManager {
 
     public void listBoxMulti(final String listTitle, final String[] listValue) {
         if (listTitle.equals("Qualification")) {
-            String qualifyFieldXpath = String.format("(//label[@tuilabel='Qualification']//div[@class='t-icons t-icons_right ng-star-inserted'])[%s]", this.index);
+            String qualifyFieldXpath = String.format("(//label[@tuilabel='Qualification']//div[@automation-id='tui-multi-select__arrow'])[%s]", this.index);
             this.driver.findElement(By.xpath(qualifyFieldXpath)).click();
         } else if (listTitle.equals("Category")) {
-            String qualifyFieldXpath = String.format("(//label[@tuilabel='Category']//div[@class='t-icon t-textfield-icon ng-star-inserted'])[%s]", this.index);
+            String qualifyFieldXpath = String.format("(//label[@tuilabel='Category']//div[@class='t-tags'])[%s]", this.index);
             this.driver.findElement(By.xpath(qualifyFieldXpath)).click();
         }
 
@@ -142,19 +153,24 @@ public class SeatRuleManager {
         //Helper.wait(1000);
     }
 
-    public void button(final String buttonTitle) {
+    public void pushButton(final String buttonTitle) {
         Helper.wait(1000);
         String buttonXpath = String.format("//button//span[contains(text(), '%s')]", buttonTitle);
         this.driver.findElement(By.xpath(buttonXpath)).click();
     }
 
-    public void checkBox (final String chkBoxTitle) {
+    public void addRule() {
+        String buttonXpath = "//div[contains(text(), 'Seat rules')]/../button";
+        this.driver.findElement(By.xpath(buttonXpath)).click();
+    }
+
+    public void clickCheckBox(final String chkBoxTitle) {
         String chkXpath = String.format("//label[@tuilabel='%s']//input[@class='t-native']", chkBoxTitle);
         this.driver.findElement(By.xpath(chkXpath)).click();
         Helper.wait(1000);
     }
 
-    public void dateForm(final String dateSeq, String date) {
+    public void dateForm(final String dateSeq, final String date) {
         String dateXpath;
         if (dateSeq.equals("From")) {
             dateXpath = "(//input[@automation-id='tui-primitive-textfield__native-input'])[2]";
@@ -163,8 +179,8 @@ public class SeatRuleManager {
             dateXpath = "(//input[@automation-id='tui-primitive-textfield__native-input'])[3]";
         }
         WebElement dateFrm = this.driver.findElement(By.xpath(dateXpath));
+        dateFrm.clear();
         dateFrm.click();
-        //dateFrm.sendKeys(Keys.CLEAR);
         dateFrm.sendKeys(date);
 
         String dataCaldrXpath;
@@ -173,7 +189,7 @@ public class SeatRuleManager {
         Helper.wait(1000);
     }
 
-    public void allFoundRulesOnOnePage(int numberOfPages) {
+    public void allFoundRulesOnOnePage(final int numberOfPages) {
         String pageXpath = "//div[contains(text(), 'Items per page')]//input[@id='uniqueId']";
         this.driver.findElement(By.xpath(pageXpath)).clear();
         this.driver.findElement(By.xpath(pageXpath)).click();
@@ -188,7 +204,7 @@ public class SeatRuleManager {
             final String qty = this.driver.findElement(By.xpath(messageXpath)).getText();
             String[] array = qty.split(" ");
             result = Integer.parseInt(array[array.length -1]);
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.out.println("в сообщении о результатах поиска не число");
         }
         return result;
@@ -213,7 +229,7 @@ public class SeatRuleManager {
         return size;
     }
 
-    public String positionXpathFinder (String position) {
+    public String positionXpathFinder (final String position) {
         String positionXpath = switch (position) {
             case "LS", "LRS", "LJS" -> "//div[text()='Flight Deck']/following-sibling::div[@class='flight-deck__row'][1]/div[1]/div[1]";
             case "RS", "RLS", "RJS" -> "//div[text()='Flight Deck']/following-sibling::div[@class='flight-deck__row'][1]/div[2]/div[1]";
@@ -229,9 +245,8 @@ public class SeatRuleManager {
         return textOnBoard;
     }
 
-    public int trainerCodeControl (String crewType) {
+    public int codeControl(final String crewType) {
         int count = 0;
-        button("ADD RULE");
         String[] code = Constant.Ui.UNIQUE_CODES;
         listBox("Type", crewType);
         for(String s : code) {
@@ -243,9 +258,9 @@ public class SeatRuleManager {
                 isPresent = this.driver.findElements(By.xpath("//div[text()=' Maximum length is 1 character ']")).size() > 0;
             } else {
                 if (crewType.equals("Trainer")) {
-                    isPresent = this.driver.findElements(By.xpath("//div[text()=' Only upper case case are allowed ']")).size() > 0;
+                    isPresent = this.driver.findElements(By.xpath("//div[text()=' Only upper case are allowed ']")).size() > 0;
                 } else if (crewType.equals("Trainee")) {
-                    isPresent = this.driver.findElements(By.xpath("//div[text()=' Only lower case case are allowed ']")).size() > 0;
+                    isPresent = this.driver.findElements(By.xpath("//div[text()=' Only lower case are allowed ']")).size() > 0;
                 }
             }
             if (isPresent) {
@@ -255,4 +270,107 @@ public class SeatRuleManager {
         return count;
     }
 
+    public LocalDate parserDate(final String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return LocalDate.parse(date, formatter);
+    }
+
+    public String getCalendarValue (String dateTitle, String dateSeq) {
+        String dateXpath = null;
+        if (dateTitle.equals("Period of validity") & dateSeq.equals("From")) {
+            dateXpath = "(//input[@automation-id='tui-primitive-textfield__native-input'])[2]";
+        } else if (dateTitle.equals("Period of validity") & dateSeq.equals("To")) {
+            dateXpath = "(//input[@automation-id='tui-primitive-textfield__native-input'])[3]";
+        }
+        return this.driver.findElement(By.xpath(dateXpath)).getAttribute("value");
+    }
+
+    public List<String> getListBoxValues (final String title) {
+        List<String> data = new ArrayList<>();
+        if (title.equals("Position")) {
+            this.driver.findElement(By.xpath(String.format(
+                    "//label[@tuilabel='%s']//input[@automation-id='tui-primitive-textfield__native-input']", title)))
+                    .click();
+            Helper.wait(1000);
+            String crewDataPosition;
+            String crewDataSubPosition;
+            for (int i = 1; i <= Constant.Dictionary.POSITION.size(); i++) {
+                WebElement crewDataString = this.driver.findElement(By.xpath(String.format(
+                        "(//tui-data-list//button//tui-select-option[@class='ng-star-inserted'])[%d]", i)));
+                WebElement crewDataSubstring = this.driver.findElement(By.xpath(String.format("(//small)[%d]", i)));
+                crewDataPosition = crewDataString.getText().replaceAll("\n", "");
+                if (crewDataSubstring.getText().equals("LS") || crewDataSubstring.getText().equals("RS")) {
+                    crewDataSubPosition = String.format("(%s)$", crewDataSubstring.getText());
+                } else {
+                    crewDataSubPosition = crewDataSubstring.getText();
+                }
+                data.add(crewDataPosition.replaceAll(crewDataSubPosition, ""));
+            }
+        } else if (List.of("Carrier", "Aircraft", "Role", "Subtask").contains(title)) {
+            this.driver.findElement(By.xpath(String.format(
+                    "//label[@tuilabel='%s']//input[@automation-id='tui-primitive-textfield__native-input']", title)))
+                    .click();
+            Helper.wait(1000);
+            List<String> dictionary = switch (title) {
+                case "Aircraft" -> Constant.Dictionary.AIRCRAFTS;
+                case "Carrier" -> Constant.Dictionary.AIRLINES;
+                case "Type" -> Constant.Dictionary.TYPE;
+                case "Role" -> Constant.Dictionary.ROLE;
+                case "Subtask" -> Constant.Dictionary.SUB_TASK;
+                case "Crew" -> Constant.Dictionary.CREW_MEMBER_TYPE;
+                default -> throw new IllegalArgumentException("oops, data wrong!");
+            };
+            for (int i = 1; i <= dictionary.size(); i++) {
+                WebElement crewData = this.driver.findElement(By.xpath(String.format(
+                        "(//tui-data-list//button//tui-select-option)[%d]", i)));
+                data.add(crewData.getText());
+            }
+        } else if (title.equals("Qualification")) {
+            this.driver.findElement(By.xpath(String.format(
+                            "//label[@tuilabel='%s']//div[@class='t-tags']", title)))
+                    .click();
+            Helper.wait(1000);
+            for (int i = 1; i <= Constant.Dictionary.QUALIFICATION.size(); i++) {
+                WebElement crewData = this.driver.findElement(By.xpath(String.format(
+                        "(//tui-data-list//button//tui-multi-select-option)[%d]", i)));
+                data.add(crewData.getText());
+            }
+        } else if (title.equals("Type")) {
+            this.driver.findElement(By.xpath(String.format(
+                            "(//label[@tuilabel='%s']//input[@automation-id='tui-primitive-textfield__native-input'])[%d]", title, this.index)))
+                    .click();
+            Helper.wait(1000);
+            for (int i = 1; i <= Constant.Dictionary.TYPE.size(); i++) {
+                WebElement crewData = this.driver.findElement(By.xpath(String.format(
+                        "(//tui-data-list//button//tui-select-option)[%d]", i)));
+                data.add(crewData.getText());
+            }
+        }
+        return data;
+    }
+
+    public String getNewSeatRuleId () {
+        String idXpath = "//label[@tuilabel='ID']//span[@class='t-content']";
+        return this.driver.findElement(By.xpath(idXpath)).getText().replaceAll(" ", "");
+    }
+
+    public Integer generalMemberCounter () {
+        int count = 0;
+        final String memberXpath = "//div[@class='form-row ng-untouched ng-pristine ng-invalid ng-star-inserted']";
+        for (int i = 1; i <= Constant.Ui.MAX_GENERAL_CREW_MEMBER + 1; i++) {
+            count = this.driver.findElements(By.xpath(memberXpath)).size();
+            addMember("general");
+        }
+        return count;
+    }
+
+    public Integer additionalMemberCounter () {
+        int count = 0;
+        final String memberXpath = "//div[@class='form-row ng-star-inserted']";
+        for (int i = 1; i <= Constant.Ui.MAX_ADDITIONAL_CREW_MEMBER + 1; i++) {
+            count = this.driver.findElements(By.xpath(memberXpath)).size();
+            addMember("additional");
+        }
+        return count;
+    }
 }
