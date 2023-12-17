@@ -95,9 +95,7 @@ public class AdministrationApiTest extends TestBase {
     public void testNewDuplicateSortIndexCategoryNegative () {
         int lastSortIndex = Helper.getMaxSortIndex();
         List<Category> allCategory = settingsService.getAllCategory();
-        System.out.println(allCategory);
-        System.out.println("-------------");
-        System.out.println(lastSortIndex);
+        
         CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("sameIndex", 39,
                 false)
                 .build();
