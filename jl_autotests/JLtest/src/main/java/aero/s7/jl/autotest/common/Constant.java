@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Constant {
-    public static final String LOGIN_NAME = "a.korotchenko";
-    public static final String LOGIN_PASS = "NewPass";
+    public static final String LOGIN_NAME = "as.korotko";
+    public static final String LOGIN_PASS = "e2e4e6e8e10";
     public static final String LOGIN_NAME_WRONG = "a.korotko";
     public static final String LOGIN_PASS_WRONG = "abcdefg";
     public static final String BASE_URL = "https://jl-dev.s7.aero"; //"https://jl-uat.s7.aero";
@@ -18,8 +18,11 @@ public class Constant {
     }
 
     public static class Ui {
-
-        public static final String E_MAIL = "akorotchenko@super.com";
+        public static final int SHORT_PAUSE = 500;
+        public static final int MIDDLE_PAUSE = 3000;
+        public static final int LONG_PAUSE = 5000;
+        public static final String E_MAIL = "askorotko@kotelov.team";
+        public static final String TOAST_SEND_MESSAGE = "Flight task successfully sent";
         public static final String TYPE_1 = "Trainer";
         public static final String TYPE_2 = "Trainee";
         public static final int MAX_GENERAL_CREW_MEMBER = 6;
@@ -28,7 +31,7 @@ public class Constant {
         public static final String CREATE_RULE_AIRCRAFT = "Boeing 737-800 (winglets) pax";
         public static final String CREATE_RULE_TRAINER_CODE = "9";
         public static final String CREATE_RULE_TRAINEE_CODE = "@";
-        public static final String SEARCH_RULE_AIRCRAFT = "Airbus A321";
+        public static final String SEARCH_RULE_AIRCRAFT = "Airbus A320neo";
         public static final String SEARCH_DOC_NAME = "Сертификат";
         public static final String SEARCH_DOC_TYPE = "Dynamic";
         public static final String[] SEARCH_DOC_OWNER = new String[]{"ЛД", "ДОПП"};
@@ -40,30 +43,35 @@ public class Constant {
         public static final String SEAT_RULE_CODE = "k";
         public static final String SEAT_RULE_ROLE = "PIC";
         public static final String SEAT_RULE_POSITION = "LS";
+        public static final String PAGINATION_PAGE_SIZE = "50";
         public static final String NEW_CATEGORY_NAME = "Тестовая категория";
-        public static final String PARENT_CATEGORY_NAME = "Test-2";
+        public static final String PARENT_CATEGORY_NAME = "Test-1";
         public static final String PARENT_CATEGORY_NAME_2 = "Test-3";
         public static final String PARENT_CATEGORY_NAME_3 = "Test-4";
         public static final String PARENT_CATEGORY_NAME_DELETE = "TestForDelete";
         public static final String PARENT_CATEGORY_NAME_DELETE_2 = "TestForDelete4";
         public static final String PARENT_CATEGORY_DELETE_NEGATIVE_1 = "ParentCatForDelete1";
         public static final String PARENT_CATEGORY_DELETE_NEGATIVE_2 = "ParentCatForDelete2";
+        public static final String PARENT_CATEGORY_DELETE_NEGATIVE_3 = "ParentCatForDelete3";
+        public static final String PARENT_CATEGORY_DELETE_NEGATIVE_4 = "ParentCatForDelete4";
         public static final String CHILD_CATEGORY_NAME = "child-1 for deleteTest";
         public static final String CHILD_CATEGORY_NAME_2 = "child-22 for deleteTest";
         public static final String CHILD_CATEGORY_NAME_3 = "child-3 for deleteTest";
         public static final String CHILD_CATEGORY_DELETE_NEGATIVE_2 = "ChildCatForDelete2";
+        public static final String CHILD_CATEGORY_DELETE_NEGATIVE_3 = "ChildCatForDelete3";
+        public static final String CHILD_CATEGORY_DELETE_NEGATIVE_4 = "ChildCatForDelete4";
         public static final String DATE_FROM_CDV = "01052023";
         public static final String DATE_TO_CDV = "31122023";
         public static final String DATE_FROM_CDV_2 = "05052023";
         public static final String DATE_TO_CDV_2 = "31052023";
         public static final String DATE_FROM_CDV_UPDATE = "01062023";
         public static final String DATE_TO_CDV_WRONG = "30042023";
-        public static final String CDV_NUMBER = "01052023/052023/3182023";
-        public static final String CDV_NUMBER_UPDATE = "01012023/192023/1222023";
-        public static final String CDV_NUMBER_WRONG = "01052023/052023";
+        public static final String CDV_NUMBER = "01052023/052023/3182036";
+        public static final String CDV_NUMBER_UPDATE = "01012023/192024/1222999";
+        public static final String CDV_NUMBER_WRONG = "01052023/052023/123456";
         public static final String SEARCH_LEG_FLIGHT_NUMBER = "5226";
         public static final String SEARCH_LEG_CREW = "FD";
-        public static final String SEARCH_LEG_DATE = "01092023";
+        public static final String SEARCH_LEG_DATE = "01082023";
         public static final String SEARCH_LEG_DEP_AIRPORT = "OVB";
         public static final String SEARCH_LEG_ARR_AIRPORT = "AER";
         public static final String SEARCH_LEG_CARRIER = "S7";
@@ -93,11 +101,11 @@ public class Constant {
         public static final String TOAST_SEAT_RULE_DELETED = "Seat rule deleted";
         public static final String TOAST_SEAT_RULE_TASK_DELETED = "Task deleted";
         public static final String TOAST_SEAT_RULE_RECOVERED = "Seat rule recovered";
-        public static final String TOAST_SEAT_RULE_OUT_OF_DATE_RECOVERED = "Seat rule can not be recovered: out of date";
-        public static final String TOAST_SEAT_RULE_TRAINER_CODE_CONTROL = "Only upper case case are allowed";
-        public static final String TOAST_SEAT_RULE_TRAINEE_CODE_CONTROL = "Only lower case case are allowed";
-        public static final String TOAST_SEAT_RULE_LENGTH_CODE_CONTROL = "Maximum length is 1 character";
-        public static final String TOAST_REQUIRED_FIELD = "Required field";
+        public static final String TOAST_SEAT_RULE_CANNOT_RECOVERED = "Seat rule can not be recovered: out of date";
+        public static final String SEAT_RULE_TRAINER_CODE_CONTROL = "Only upper case case are allowed";
+        public static final String SEAT_RULE_TRAINEE_CODE_CONTROL = "Only lower case case are allowed";
+        public static final String SEAT_RULE_LENGTH_CODE_CONTROL = "Maximum length is 1 character";
+        public static final String REQUIRED_FIELD = "Required field";
         public static final String TOAST_SEAT_RULE_MEMBER_TYPE_CONTROL = "Task must contain one Trainee and one Trainer";
         public static final String TOAST_DOCUMENT_CREATED = "Document created";
         public static final String TOAST_DOCUMENT_UPDATED = "Document updated";
@@ -107,21 +115,24 @@ public class Constant {
         public static final String TOAST_DOCUMENT_NAME_LENGTH = "Maximum length — 255";
         public static final String TOAST_DOCUMENT_DESCRIPTION_LENGTH = "Maximum length — 100";
         public static final String TOAST_WRONG_FILE_ATTACHMENT = "Wrong file type";
-        public static final String TOAST_DOCUMENT_OUT_OF_DATE_RECOVERED = "Document can not be recovered: out of date";
+        public static final String TOAST_DOCUMENT_CANNOT_RECOVERED = "Document can not be recovered: out of date";
         public static final String TOAST_DOC_RULE_CREATED = "Doc rule created";
         public static final String TOAST_DOC_RULE_UPDATED = "Doc rule updated";
         public static final String TOAST_DOC_RULE_DELETED = "Doc rule deleted";
         public static final String TOAST_DOC_RULE_DUPLICATE = "Doc rule already exists";
         public static final String TOAST_CATEGORY_CREATED = "Category created";
         public static final String TOAST_CATEGORY_UPDATED = "Category updated";
-        public static final String TOAST_CATEGORY_DELETED = "Category deleted";
+        public static final String TOAST_CATEGORY_DELETED = "Document category deleted";
         public static final String TOAST_NEW_CATEGORY_NAME_CONTROL = "Category with this name already exist";
         public static final String TOAST_NEW_CATEGORY_INDEX_CONTROL = "Category with this index already exist";
         public static final String TOAST_CREATE_TD = "Transport declaration created";
         public static final String TOAST_UPDATE_TD = "Transport declaration updated";
-        public static final String TOAST_SUCCESS_ACTION = "Action successful";
-        public static final String TOAST_INVALID_VALUE = "Value is invalid";
-        public static final String TOAST_DELETE_CATEGORY_WITH_DOCS = "Impossible to delete a category with documents linked to it";
+        public static final String MODAL_ACCEPT_DELETE = "Are you sure want to delete this item?";
+        public static final String MODAL_DUPLICATE_TD = "The transport declaration with fuel number already exists";
+        public static final String MODAL_MIXED_DATE = "The dates of the transport declaration are mixed up";
+        public static final String INVALID_VALUE = "Value is invalid";
+        public static final String MODAL_DELETE_CATEGORY_WITH_DOCS = "The document category with identifier has linked documents.";
+        public static final String MODAL_DELETE_CATEGORY_WITH_EMPTY_CHILD = "The document category with identifier has children";
         public static final String TOAST_DELETE_LAST_DOC_RULE = "The document must be assigned at least one rule";
 
         static String[] POSITION_TEST = {"LS", "RS", "JS1", "JS2", "S1", "S2", "S3", "S4"};
@@ -136,7 +147,8 @@ public class Constant {
         static String[] CREW_QUALIFICATION = {"CFI", "CP", "CPrh", "TRE", "FO"};
         static String[] CREW_ROLE = {"PIC", "SP"};
         static String[] CREW_SUB_TASK = {"PICUS", "LE", "LTC"};
-        static String[] MEMBER_TYPE = {"Trainer", "Trainee", "Member"};
+        static String[] GENERAL_MEMBER_TYPE = {"Trainer", "Trainee"};
+        static String[] ADDITIONAL_MEMBER_TYPE = {"Trainer", "Trainee", "Member"};
         static String[] AIRLINES_CODE = {"GH", "S7", "XT"}; // "GH", "S7", "XT", "ALL"
         static String[] AIRCRAFT_NAME = {"Airbus A320(sharklets)", "Airbus A320neo", "Airbus A321",
                 "Airbus A321(sharklets)", "Airbus A321neo", "Boeing 737-800 (winglets) Freighter", "Boeing 737-800 (winglets) pax",
@@ -188,7 +200,8 @@ public class Constant {
         public static final List<String> QUALIFICATION = Arrays.asList(CREW_QUALIFICATION);
         public static final List<String> ROLE = Arrays.asList(CREW_ROLE);
         public static final List<String> SUB_TASK = Arrays.asList(CREW_SUB_TASK);
-        public static final List<String> TYPE = Arrays.asList(MEMBER_TYPE);
+        public static final List<String> TYPE_GENERAL = Arrays.asList(GENERAL_MEMBER_TYPE);
+        public static final List<String> TYPE_ADDITIONAL = Arrays.asList(ADDITIONAL_MEMBER_TYPE);
         public static final List<String> AIRLINES = Arrays.asList(AIRLINES_CODE);
         public static final List<String> AIRCRAFTS = Arrays.asList(AIRCRAFT_NAME);
         public static final List<String> BOARDS = Arrays.asList(BOARD_REG_NUMBERS);

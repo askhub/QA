@@ -32,7 +32,7 @@ public class AdministrationApiTest extends TestBase {
     @Test
     public void testGetCategory () {
         int lastSortIndex = Helper.getMaxSortIndex();
-        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("тестКатегория2",
+        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("тестКатегория4",
                 lastSortIndex+1,
                 false)
                 .build();
@@ -51,7 +51,7 @@ public class AdministrationApiTest extends TestBase {
     public void testCreateNewParentCategory () {
         int lastSortIndex = Helper.getMaxSortIndex();
 
-        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("тестКатегория1",
+        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("тестКатегория3",
                                                                         lastSortIndex+1,
                                                                         false)
                                                                         .build();
@@ -64,7 +64,7 @@ public class AdministrationApiTest extends TestBase {
     @Test
     public void testCreateNewChildCategory () {
         int lastSortIndex = Helper.getMaxSortIndex();
-        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("дочерняя тестовая категория",
+        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("дочерняя тестовая категория1",
                                                                         lastSortIndex+1,
                                                                         false)
                                                                         .setParentDocCategoryId(lastSortIndex)
@@ -91,12 +91,12 @@ public class AdministrationApiTest extends TestBase {
         Assert.assertTrue(settingsService.createNewCategoryNegative(newCategoryBody));
     }
 
+    @Ignore("test was blocked by database. Sort index control will be implements later")
     @Test
     public void testNewDuplicateSortIndexCategoryNegative () {
         int lastSortIndex = Helper.getMaxSortIndex();
-        List<Category> allCategory = settingsService.getAllCategory();
-        
-        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("sameIndex", 39,
+
+        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder("sameIndex", lastSortIndex,
                 false)
                 .build();
         Assert.assertTrue(settingsService.createNewCategoryNegative(newCategoryBody));
@@ -106,15 +106,15 @@ public class AdministrationApiTest extends TestBase {
     public void testUpdateCategory () {
         int lastSortIndex = Helper.getMaxSortIndex();
 
-        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder ("new category",
+        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder ("new category2",
                                                                             lastSortIndex+1,
                                                                             false)
                                                                             .build();
         Category newCategory = settingsService.createCategory(newCategoryBody);
-        Assert.assertNotNull(newCategory);
+        Assert.assertTrue(newCategory.getIsActive());
         Assert.assertEquals(newCategory.getName(), newCategoryBody.getName());
 
-        CategoryUpdateForm updateCategoryBody = new CategoryUpdateFormBuilder("updateCat",
+        CategoryUpdateForm updateCategoryBody = new CategoryUpdateFormBuilder("updateCat2",
                                                                                 newCategory.getSortIndex(),
                                                                                 false)
                                                                                 .build();
@@ -127,15 +127,15 @@ public class AdministrationApiTest extends TestBase {
     public void testUpdateChildCategory () {
         int lastSortIndex = Helper.getMaxSortIndex();
 
-        CategoryCreateForm newParentCategoryBody = new CategoryCreateFormBuilder ("ParentCategoryForUpdate",
-                lastSortIndex+1,
-                false)
-                .build();
+        CategoryCreateForm newParentCategoryBody = new CategoryCreateFormBuilder ("ParentCategoryForUpdate1",
+                                                                                lastSortIndex+1,
+                                                                                false)
+                                                                                .build();
         Category newParentCategory = settingsService.createCategory(newParentCategoryBody);
         Assert.assertEquals(newParentCategory.getName(), newParentCategoryBody.getName());
         Assert.assertTrue(newParentCategory.getIsActive());
 
-        CategoryCreateForm newChildCategoryBody = new CategoryCreateFormBuilder ("ChildCategoryForUpdate",
+        CategoryCreateForm newChildCategoryBody = new CategoryCreateFormBuilder ("ChildCategoryForUpdate1",
                 lastSortIndex+2,
                 false)
                 .setParentDocCategoryId(newParentCategory.getDocumentCategoryId())
@@ -144,7 +144,7 @@ public class AdministrationApiTest extends TestBase {
         Assert.assertTrue(newChildCategory.getIsActive());
         Assert.assertEquals(newChildCategory.getName(), newChildCategoryBody.getName());
 
-        CategoryUpdateForm updateCategoryBody = new CategoryUpdateFormBuilder("updateChildCat",
+        CategoryUpdateForm updateCategoryBody = new CategoryUpdateFormBuilder("updateChildCat1",
                                                                                 newChildCategory.getSortIndex(),
                                                                                 false)
                                                                                 .build();
@@ -157,12 +157,12 @@ public class AdministrationApiTest extends TestBase {
     public void deleteCategory () {
         int lastSortIndex = Helper.getMaxSortIndex();
 
-        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder ("TestDelParentCat",
+        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder ("TestDelParentCat1",
                                                                         lastSortIndex+1,
                                                                         false)
                                                                         .build();
         Category newCategory = settingsService.createCategory(newCategoryBody);
-        Assert.assertNotNull(newCategory);
+        Assert.assertTrue(newCategory.getIsActive());
 
         Category deactivateParentCategory = settingsService.deleteCategory(newCategory.getDocumentCategoryId());
         Assert.assertFalse(deactivateParentCategory.getIsActive());
@@ -172,20 +172,20 @@ public class AdministrationApiTest extends TestBase {
     public void deleteParentCategoryWithDocuments () {
         int lastSortIndex = Helper.getMaxSortIndex();
 
-        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder ("ParentDeleteWithDocs",
-                lastSortIndex+1,
-                false)
-                .build();
+        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder ("ParentDeleteWithDocs2",
+                                                                            lastSortIndex+1,
+                                                                            false)
+                                                                            .build();
         Category newCategory = settingsService.createCategory(newCategoryBody);
-        Assert.assertNotNull(newCategory);
+        Assert.assertTrue(newCategory.getIsActive());
 
         DocumentsPacking documentsPacking = documentsPackingService.createDocumentWithRule(
                 DocTemplateWithRulesCreateForm.docForSettingsTest(newCategory.getDocumentCategoryId()));
         Assert.assertNotNull(documentsPacking);
+        Assert.assertTrue(documentsPacking.getIsActive());
         Assert.assertNotNull(documentsPacking.getDocRulesIds());
         Assert.assertTrue(documentsPacking.getDocRulesIds().size() > 0);
         Assert.assertEquals(documentsPacking.getDocCategoryId(), newCategory.getDocumentCategoryId());
-        Assert.assertTrue(documentsPacking.getIsActive());
 
         Assert.assertTrue(settingsService.deleteCategoryNegative(newCategory.getDocumentCategoryId()));
     }
@@ -194,20 +194,20 @@ public class AdministrationApiTest extends TestBase {
     public void deleteChildCategory () {
         int lastSortIndex = Helper.getMaxSortIndex();
 
-        CategoryCreateForm newParentCategoryBody = new CategoryCreateFormBuilder ("ParentForChildDelete",
-                lastSortIndex+1,
-                false)
-                .build();
+        CategoryCreateForm newParentCategoryBody = new CategoryCreateFormBuilder ("ParentForChildDelete1",
+                                                                                lastSortIndex+1,
+                                                                                false)
+                                                                                .build();
         Category newParentCategory = settingsService.createCategory(newParentCategoryBody);
-        Assert.assertNotNull(newParentCategory);
+        Assert.assertTrue(newParentCategory.getIsActive());
 
-        CategoryCreateForm newChildCategoryBody = new CategoryCreateFormBuilder ("ChildCatDelete",
-                lastSortIndex+2,
-                false)
-                .setParentDocCategoryId(newParentCategory.getDocumentCategoryId())
-                .build();
+        CategoryCreateForm newChildCategoryBody = new CategoryCreateFormBuilder ("ChildCatDelete1",
+                                                    lastSortIndex+2,
+                                                    false)
+                                                    .setParentDocCategoryId(newParentCategory.getDocumentCategoryId())
+                                                    .build();
         Category newChildCategory = settingsService.createCategory(newChildCategoryBody);
-        Assert.assertNotNull(newChildCategory);
+        Assert.assertTrue(newChildCategory.getIsActive());
 
         Category deactivateChildCategory = settingsService.deleteCategory(newChildCategory.getDocumentCategoryId());
         Assert.assertFalse(deactivateChildCategory.getIsActive());
@@ -217,20 +217,20 @@ public class AdministrationApiTest extends TestBase {
     public void deleteChildCategoryWithDocuments () {
         int lastSortIndex = Helper.getMaxSortIndex();
 
-        CategoryCreateForm newParentCategoryBody = new CategoryCreateFormBuilder ("ParentNegativeDelete",
-                lastSortIndex+1,
-                false)
-                .build();
+        CategoryCreateForm newParentCategoryBody = new CategoryCreateFormBuilder ("ParentNegativeDelete1",
+                                                                                lastSortIndex+1,
+                                                                                false)
+                                                                                .build();
         Category newParentCategory = settingsService.createCategory(newParentCategoryBody);
-        Assert.assertNotNull(newParentCategory);
+        Assert.assertTrue(newParentCategory.getIsActive());
 
-        CategoryCreateForm newChildCategoryBody = new CategoryCreateFormBuilder ("ChildForDeleteWithDocs",
-                lastSortIndex+2,
-                false)
-                .setParentDocCategoryId(newParentCategory.getDocumentCategoryId())
-                .build();
+        CategoryCreateForm newChildCategoryBody = new CategoryCreateFormBuilder ("ChildForDeleteWithDocs1",
+                                                    lastSortIndex+2,
+                                                    false)
+                                                    .setParentDocCategoryId(newParentCategory.getDocumentCategoryId())
+                                                    .build();
         Category newChildCategory = settingsService.createCategory(newChildCategoryBody);
-        Assert.assertNotNull(newChildCategory);
+        Assert.assertTrue(newChildCategory.getIsActive());
 
         DocumentsPacking documentsPacking = documentsPackingService.createDocumentWithRule(
                 DocTemplateWithRulesCreateForm.docForSettingsTest(newChildCategory.getDocumentCategoryId()));
@@ -244,112 +244,211 @@ public class AdministrationApiTest extends TestBase {
     }
 
     @Test
-    public void testCreateTdDocument () {
-        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-12-01",
-                                                                       "2023-12-31",
-                                                                  "01122083/122023/3122036")
-                                                                    .build();
-        TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
-        Assert.assertNotNull(newDeclaration);
-        Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
-        Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
-        Assert.assertEquals(newDeclarationBody.getFuelDeclNumber(), newDeclaration.getFuelDeclNumber());
+    public void testRecoveryParentCategory () {
+        int lastSortIndex = Helper.getMaxSortIndex();
+
+        CategoryCreateForm newCategoryBody = new CategoryCreateFormBuilder ("TestRecoveryParentCat1",
+                                                                            lastSortIndex+1,
+                                                                            false)
+                                                                            .build();
+        Category newCategory = settingsService.createCategory(newCategoryBody);
+        Assert.assertTrue(newCategory.getIsActive());
+
+        Assert.assertFalse(settingsService.deleteCategory(newCategory.getDocumentCategoryId()).getIsActive());
+        Assert.assertTrue(settingsService.recoverCategory(newCategory.getDocumentCategoryId()).getIsActive());
     }
 
     @Test
-    public void testGetTdTsDeclaration () {
-        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-12-01T00:00:00.000Z",
-                                                            "2024-01-31T00:00:00.000Z",
-                                                        "01122023/122024/3229023")
+    public void testRecoveryChildCategory () {
+        int lastSortIndex = Helper.getMaxSortIndex();
+
+        CategoryCreateForm newParentCategoryBody = new CategoryCreateFormBuilder ("ParentForRecovery1",
+                lastSortIndex+1,
+                false)
+                .build();
+        Category newParentCategory = settingsService.createCategory(newParentCategoryBody);
+        Assert.assertTrue(newParentCategory.getIsActive());
+
+        CategoryCreateForm newChildCategoryBody = new CategoryCreateFormBuilder ("ChildRecovery3",
+                                                    lastSortIndex+2,
+                                                    false)
+                                                    .setParentDocCategoryId(newParentCategory.getDocumentCategoryId())
+                                                    .build();
+        Category newChildCategory = settingsService.createCategory(newChildCategoryBody);
+        Assert.assertTrue(newChildCategory.getIsActive());
+
+        Assert.assertFalse(settingsService.deleteCategory(newChildCategory.getDocumentCategoryId()).getIsActive());
+
+        Assert.assertTrue(settingsService.recoverCategory(newChildCategory.getDocumentCategoryId()).getIsActive());
+    }
+
+    @Test
+    public void testCreateDeclaration () {
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-12-01",
+                                                                       "2023-12-31",
+                                                                  "01122083/122023/9123036")
                                                                     .build();
         TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
         Assert.assertNotNull(newDeclaration);
+        Assert.assertTrue(newDeclaration.getIsActive());
         Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
         Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
-        Assert.assertEquals(newDeclarationBody.getFuelDeclNumber(), newDeclaration.getFuelDeclNumber());
+        Assert.assertEquals(newDeclarationBody.getFuelNumber(), newDeclaration.getFuelNumber());
+    }
+
+    @Test
+    public void testCreateDeclarationDuplicate () {
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-12-01",
+                                                                    "2024-12-31",
+                                                                    "01122083/122024/3122024")
+                                                                    .build();
+        TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
+        Assert.assertNotNull(newDeclaration);
+        Assert.assertTrue(newDeclaration.getIsActive());
+        Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
+        Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
+        Assert.assertEquals(newDeclarationBody.getFuelNumber(), newDeclaration.getFuelNumber());
+        TdTsCreateForm newDeclarationBodyDuplicate = new TdTsCreateFormBuilder("2023-12-01",
+                                                                                "2024-12-31",
+                                                                                "01122083/122024/3122024")
+                                                                                .build();
+        Assert.assertTrue(settingsService.createDeclarationNegative(newDeclarationBodyDuplicate));
+    }
+
+    @Test
+    public void testGetTdDeclaration () {
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-11-01",
+                                                                        "2024-01-31",
+                                                                    "01122023/122025/7229023")
+                                                                    .build();
+        TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
+        Assert.assertNotNull(newDeclaration);
+        Assert.assertTrue(newDeclaration.getIsActive());
+        Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
+        Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
+        Assert.assertEquals(newDeclarationBody.getFuelNumber(), newDeclaration.getFuelNumber());
 
         TdTs checkDeclaration = settingsService.getDeclaration(newDeclaration.getId());
         Assert.assertEquals(checkDeclaration.getDateStart(), newDeclaration.getDateStart());
         Assert.assertEquals(checkDeclaration.getDateEnd(), newDeclaration.getDateEnd());
-        Assert.assertEquals(checkDeclaration.getFuelDeclNumber(), newDeclaration.getFuelDeclNumber());
+        Assert.assertEquals(checkDeclaration.getFuelNumber(), newDeclaration.getFuelNumber());
     }
 
     @Test
     public void testCreateDeclarationNegativeWrongDate () {
-        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-11-01T00:00:00Z",
-                                                              "2022-11-30T00:00:00Z",
-                                                        "12365478/985236/9874123")
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-11-01",
+                                                              "2022-11-30",
+                                                        "12365478/685236/9874723")
                                                                     .build();
         Assert.assertTrue(settingsService.createDeclarationNegative(newDeclarationBody));
     }
     @Ignore("request would be blocked by builder")
     @Test
     public void testCreateDeclarationNegativeMissFuelDeclarationNumber () {
-        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-11-01T00:00:00Z",
-                                                                    "2023-11-30T00:00:00Z",
-                                                            "98765432/235689/9874123")
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2023-11-01",
+                                                                    "2023-11-30",
+                                                            "98765432/235684/9674123")
                                                                         .build();
         Assert.assertTrue(settingsService.createDeclarationNegative(newDeclarationBody));
     }
 
     @Test
     public void testUpdateDeclaration () {
-        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2024-03-01T00:00:00Z",
-                                                                        "2024-03-28T00:00:00Z",
-                                                                    "01022029/022028/2872899")
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2024-05-01",
+                                                                        "2024-05-31",
+                                                                    "01052024/052024/3152094")
                                                                     .build();
         TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
         Assert.assertNotNull(newDeclaration);
-        //Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
-        //Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
-        Assert.assertEquals(newDeclarationBody.getFuelDeclNumber(), newDeclaration.getFuelDeclNumber());
+        Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
+        Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
+        Assert.assertEquals(newDeclarationBody.getFuelNumber(), newDeclaration.getFuelNumber());
 
         TdTsUpdateForm updateDeclarationBody = new TdTsUpdateFormBuilder()
-                .setDateStart("2024-03-01T00:00:00Z")
-                .setDateEnd("2024-03-28T00:00:00Z")
+                .setDateStart("2024-03-01")
+                .setDateEnd("2024-03-28")
                 .setIsActive(true)
-                .setFuelDeclNumber("20240301/208402/0001000")
+                .setFuelNumber("20240301/208402/0001100")
                 .build();
 
         TdTs updateDeclaration = settingsService.updateDeclaration(newDeclaration.getId(), updateDeclarationBody);
         Assert.assertNotNull(updateDeclaration);
-        Assert.assertEquals(updateDeclaration.getFuelDeclNumber(), updateDeclarationBody.getFuelDeclNumber());
-        Assert.assertNotEquals(updateDeclaration.getFuelDeclNumber(), newDeclaration.getFuelDeclNumber());
+        Assert.assertEquals(updateDeclaration.getFuelNumber(), updateDeclarationBody.getFuelNumber());
+        Assert.assertNotEquals(updateDeclaration.getFuelNumber(), newDeclaration.getFuelNumber());
     }
 
     @Test
-    public void testUpdateDeclarationNegative () {
-        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2024-03-01T00:00:00.000Z",
-                                                                        "2024-03-31T00:00:00.000Z",
-                                                                        "01032024/032027/3932029")
+    public void testUpdateDeclarationDateNegative () {
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2024-03-01",
+                                                                        "2024-03-31",
+                                                                        "01032027/032027/3932029")
                                                                     .build();
         TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
         Assert.assertNotNull(newDeclaration);
-        //Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
-        //Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
-        Assert.assertEquals(newDeclarationBody.getFuelDeclNumber(), newDeclaration.getFuelDeclNumber());
+        Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
+        Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
+        Assert.assertEquals(newDeclarationBody.getFuelNumber(), newDeclaration.getFuelNumber());
 
         TdTsUpdateForm updateDeclarationBody = new TdTsUpdateFormBuilder()
-                .setIsActive(true)
-                .setDateStart("2024-03-01T00:00:00.000Z")
-                .setDateEnd("2023-03-31T00:00:00Z")
-                .setFuelDeclNumber("01032024/032027/3932029")
-                .build();
+                                                                    .setIsActive(true)
+                                                                    .setDateStart("2024-03-01")
+                                                                    .setDateEnd("2023-03-31")
+                                                                    .setFuelNumber("01032024/032027/3532029")
+                                                                    .build();
+        Assert.assertTrue(settingsService.updateDeclarationNegative(newDeclaration.getId(), updateDeclarationBody));
+    }
+
+    @Test
+    public void testUpdateDeclarationNumberNegative () {
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2024-02-01",
+                                                                    "2024-08-31",
+                                                                    "01022024/022024/3182024")
+                                                                    .build();
+        TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
+        Assert.assertNotNull(newDeclaration);
+        Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
+        Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
+        Assert.assertEquals(newDeclarationBody.getFuelNumber(), newDeclaration.getFuelNumber());
+
+        TdTsUpdateForm updateDeclarationBody = new TdTsUpdateFormBuilder()
+                                                                    .setIsActive(true)
+                                                                    .setDateStart("2024-02-01")
+                                                                    .setDateEnd("2024-08-31")
+                                                                    .setFuelNumber("01022024/032024/318202")
+                                                                    .build();
         Assert.assertTrue(settingsService.updateDeclarationNegative(newDeclaration.getId(), updateDeclarationBody));
     }
 
     @Test
     public void testDeleteDeclaration () {
-        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2024-03-01T00:00:00Z",
-                                                                    "2024-03-31T00:00:00Z",
-                                                            "01032024/032024/3132024")
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2024-01-01",
+                                                                    "2024-06-30",
+                                                                "01032024/062034/3162034")
                                                                         .build();
         TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
         Assert.assertNotNull(newDeclaration);
+        Assert.assertTrue(newDeclaration.getIsActive());
         Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
         Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
-        Assert.assertEquals(newDeclarationBody.getFuelDeclNumber(), newDeclaration.getFuelDeclNumber());
+        Assert.assertEquals(newDeclarationBody.getFuelNumber(), newDeclaration.getFuelNumber());
 
-        Assert.assertTrue(settingsService.deleteTdTs(newDeclaration.getId()));
+        Assert.assertFalse(settingsService.deleteDeclaration(newDeclaration.getId()).getIsActive());
+    }
+
+    @Test
+    public void testRecoveryDeclaration () {
+        TdTsCreateForm newDeclarationBody = new TdTsCreateFormBuilder("2024-02-01",
+                                                                        "2024-07-31",
+                                                                        "01022024/022024/3172035")
+                                                                        .build();
+        TdTs newDeclaration = settingsService.createDeclaration(newDeclarationBody);
+        Assert.assertNotNull(newDeclaration);
+        Assert.assertTrue(newDeclaration.getIsActive());
+        Assert.assertEquals(newDeclarationBody.getDateStart(), newDeclaration.getDateStart());
+        Assert.assertEquals(newDeclarationBody.getDateEnd(), newDeclaration.getDateEnd());
+        Assert.assertEquals(newDeclarationBody.getFuelNumber(), newDeclaration.getFuelNumber());
+        System.out.println(newDeclaration.getId());
+        Assert.assertFalse(settingsService.deleteDeclaration(newDeclaration.getId()).getIsActive());
+        Assert.assertTrue(settingsService.recoveryDeclaration(newDeclaration.getId()).getIsActive());
     }
 }

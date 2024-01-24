@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TdTsUpdateForm {
     @JsonProperty("catering_number")
-    private final String cateringDeclNumber;
+    private final String cateringNumber;
 
     @JsonProperty("end_date")
     private final String dateEnd;
@@ -13,21 +13,21 @@ public class TdTsUpdateForm {
     private final String dateStart;
 
     @JsonProperty("fuel_number")
-    private final String fuelDeclNumber;
+    private final String fuelNumber;
 
     @JsonProperty("is_active")
     private final boolean isActive;
 
     TdTsUpdateForm(TdTsUpdateFormBuilder tdTsUpdateFormBuilder) {
-        cateringDeclNumber = tdTsUpdateFormBuilder.cateringDeclNumber;
+        cateringNumber = tdTsUpdateFormBuilder.cateringNumber;
         dateEnd = tdTsUpdateFormBuilder.dateEnd;
         dateStart = tdTsUpdateFormBuilder.dateStart;
-        fuelDeclNumber = tdTsUpdateFormBuilder.fuelDeclNumber;
+        fuelNumber = tdTsUpdateFormBuilder.fuelNumber;
         isActive = tdTsUpdateFormBuilder.isActive;
     }
 
-    public String getCateringDeclNumber() {
-        return cateringDeclNumber;
+    public String getCateringNumber() {
+        return cateringNumber;
     }
     public String getDateEnd() {
         return dateEnd;
@@ -35,11 +35,11 @@ public class TdTsUpdateForm {
     public String getDateStart() {
         return dateStart;
     }
-    public String getFuelDeclNumber() {
-        return fuelDeclNumber;
+    public String getFuelNumber() {
+        return fuelNumber;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 }

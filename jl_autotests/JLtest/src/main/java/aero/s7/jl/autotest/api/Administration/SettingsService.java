@@ -17,5 +17,6 @@ public interface SettingsService {
     boolean createDeclarationNegative (TdTsCreateForm form);
     TdTs updateDeclaration (int id, TdTsUpdateForm form);
     boolean updateDeclarationNegative (int id, TdTsUpdateForm form);
-    boolean deleteTdTs (int id);
+    TdTs deleteDeclaration (int id);
+    TdTs recoveryDeclaration (int id);
 }

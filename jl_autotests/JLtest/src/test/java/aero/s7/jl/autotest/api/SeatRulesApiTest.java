@@ -407,7 +407,7 @@ public class SeatRulesApiTest extends TestBase {
 
         List<String> typeList = typeData.stream().map(Types::getName).toList();
 
-        Assert.assertEquals(new HashSet<Object>(typeList), new HashSet<Object>(Constant.Dictionary.TYPE));
+        Assert.assertEquals(new HashSet<Object>(typeList), new HashSet<Object>(Constant.Dictionary.TYPE_ADDITIONAL));
     }
 
     @Test

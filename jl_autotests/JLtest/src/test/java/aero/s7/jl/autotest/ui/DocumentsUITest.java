@@ -22,6 +22,7 @@ public class DocumentsUITest extends TestBase {
     @After
     public void goToMainChapter () {
         headerLink("eCrew tracking");
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     @Test
@@ -30,11 +31,11 @@ public class DocumentsUITest extends TestBase {
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         docpackingManager.addDocument();
-        docpackingManager.selector("Static");
+        docpackingManager.listDocTypeForm("STATIC");
         docpackingManager.listOwnerForm(new String[]{"ДНО"});
         docpackingManager.markCategoryPasteAfter("Документы по ВС");
         docpackingManager.fileLoad("SBT Memo.pdf");
-        docpackingManager.docNameField("Инфо по Сабетте");
+        docpackingManager.docNameField("Информация по Сабетте");
         docpackingManager.description("информация экипажу по прибытию");
         docpackingManager.dateValid("Valid from", "01042023");
         docpackingManager.dateValid("Valid to", "31122023");
@@ -88,6 +89,7 @@ public class DocumentsUITest extends TestBase {
         docpackingManager.addDocument();
         docpackingManager.listOwnerForm(new String[]{"ДНО"});
         docpackingManager.fileLoad("GD_new86.pdf");
+        docpackingManager.docNameField("Gen_declaration_8");
         docpackingManager.markCategoryPasteAfter("Чек-листы, анкеты, бланки");
         docpackingManager.listBox("Rule", "INCLUDE");
         docpackingManager.listBox("Route category", "CIS");
@@ -97,14 +99,14 @@ public class DocumentsUITest extends TestBase {
         docpackingManager.copiesDocRule("2");
         docpackingManager.pushButton("Save");
         Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
-        Helper.wait(5000);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
         docpackingManager.pushButton("Back");
 
-        docpackingManager.textForm("Name", "GD_new86");
+        docpackingManager.textForm("Name", "Gen_declaration_8");
         docpackingManager.pushButton("Search");
 
         docpackingManager.viewFirstDocumentsOfList();
-        Helper.wait(5000);
+        Helper.wait(Constant.Ui.LONG_PAUSE);
 
         docpackingManager.listOwnerForm(new String[]{"ЛД"});
         docpackingManager.dateValid("Valid to", "31122023");
@@ -119,12 +121,13 @@ public class DocumentsUITest extends TestBase {
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
 
         docpackingManager.addDocument();
-        docpackingManager.listOwnerForm(new String[]{"ДНО"});
+        docpackingManager.listOwnerForm(new String[]{"ДЛС"});
         docpackingManager.markCategoryPasteAfter("Прочая информация");
         docpackingManager.fileLoad("TD_TC_ARR_IKT.pdf");
+        docpackingManager.docNameField("TD_TC_ARR_PORT_IKT_MVL");
         docpackingManager.listBox("Rule", "INCLUDE");
         docpackingManager.listBox("Route category", "NO CATEGORY");
-        docpackingManager.listBox("Flight type", "MVL");
+        docpackingManager.listBox("Flight type", "VVL");
         docpackingManager.listCrewForm("FD");
         docpackingManager.listBox("Carrier", "S7");
         docpackingManager.copiesDocRule("1");
@@ -133,15 +136,16 @@ public class DocumentsUITest extends TestBase {
         Helper.wait(5000);
         docpackingManager.pushButton("Back");
 
-        docpackingManager.textForm("Name", "TD_TS_ARR_IKT");
+        docpackingManager.textForm("Name", "TD_TC_ARR_PORT_IKT_MVL");
         docpackingManager.pushButton("Search");
 
         docpackingManager.viewFirstDocumentsOfList();
-        Helper.wait(5000);
+        Helper.wait(Constant.Ui.LONG_PAUSE);
 
         docpackingManager.pushButton("Edit");
         docpackingManager.listBox("Route category", "SPLITDUTY");
-        docpackingManager.pushButton("Save");
+        docpackingManager.listBox("Flight type", "MVL");
+        docpackingManager.pushSaveRuleButton();
         Helper.notificationControl(Constant.Ui.TOAST_DOC_RULE_UPDATED);
         docpackingManager.pushButton("Back");
     }
@@ -163,7 +167,6 @@ public class DocumentsUITest extends TestBase {
         docpackingManager.copiesDocRule("1");
         docpackingManager.pushButton("Save");
         Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
-        Helper.wait(5000);
         docpackingManager.pushButton("Back");
 
         docpackingManager.textForm("Name", "GD_new86");
@@ -186,13 +189,13 @@ public class DocumentsUITest extends TestBase {
         docpackingManager.pushButton("Save");
 
         Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_RULE_CONTROL);
-        Helper.wait(1000);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
         List<WebElement> message = driver.getDriver().findElements(By.xpath("//div[@automation-id='tui-error__text']"));
         Assert.assertEquals(6, message.size());
     }
 
     @Test
-    public void newDocumentWithoutRequiredDocumentFieldNegative () {
+    public void createDocumentWithoutRequiredDocumentFieldNegative () {
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
 
@@ -218,7 +221,7 @@ public class DocumentsUITest extends TestBase {
 
         docpackingManager.addDocument();
         docpackingManager.pushButton("Save");
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
         Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_RULE_CONTROL);
         List<WebElement> message = driver.getDriver().findElements(By.xpath("//div[@automation-id='tui-error__text']"));
         Assert.assertEquals(10, message.size());
@@ -231,8 +234,8 @@ public class DocumentsUITest extends TestBase {
 
         docpackingManager.addDocument();
         docpackingManager.listOwnerForm(new String[]{"ДНО"});
-        docpackingManager.markCategoryPasteAfter("Основные документы");
-        docpackingManager.fileLoad("SBT Memo.pdf");
+        docpackingManager.markCategoryPasteAfter("Документы по центровке");
+        docpackingManager.fileLoad("5226-IKT-OVB.pdf");
         docpackingManager.listBox("Rule", "INCLUDE");
         docpackingManager.listBox("Route category", "NO CATEGORY");
         docpackingManager.listBox("Flight type", "VVL");
@@ -244,10 +247,10 @@ public class DocumentsUITest extends TestBase {
         Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
         docpackingManager.pushButton("Back");
         docpackingManager.showSidePanel();
-        docpackingManager.markCategoryOnSidePanel("Основные документы");
+        docpackingManager.markCategoryOnSidePanel("Документы по центровке");
         docpackingManager.pushButton("Search");
 
-        int actualQty = docpackingManager.searchDocByOneField("Основные документы");
+        int actualQty = docpackingManager.searchDocByOneField("Документы по центровке");
         int expectQty = docpackingManager.searchDocResult();
         Assert.assertTrue(actualQty >= 1);
         Assert.assertEquals(expectQty, actualQty);
@@ -283,16 +286,17 @@ public class DocumentsUITest extends TestBase {
         Assert.assertEquals(expectedQty, actualQty);
     }
 
-    @Ignore("rebuild, delete Type column")
     @Test
     public void searchDocTypeField () {
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
 
+        docpackingManager.pushButton("Reset");
         docpackingManager.listBox("Type", "STATIC");
+        //docpackingManager.textForm("Name", " GARR_Irkut");
         docpackingManager.pushButton("Search");
 
-        int actualQty = docpackingManager.searchDocByOneField(Constant.Ui.SEARCH_DOC_TYPE);
+        int actualQty = docpackingManager.searchDocByType("STATIC");
         int expectedQty = docpackingManager.searchDocResult();
         Assert.assertEquals(expectedQty, actualQty);
     }
@@ -317,7 +321,7 @@ public class DocumentsUITest extends TestBase {
 
         Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
         docpackingManager.pushButton("Back");
-        Helper.wait(3000);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
         docpackingManager.listOwnerSearch(new String[]{"ДОПП"});
         docpackingManager.pushButton("Search");
 
@@ -347,12 +351,13 @@ public class DocumentsUITest extends TestBase {
 
         Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
         docpackingManager.pushButton("Back");
-        Helper.wait(3000);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
 
         docpackingManager.clickCheckBox("Deleted");
         docpackingManager.pushButton("Search");
 
         int actualQty = docpackingManager.searchDocByInactiveCheckbox();
+        Assert.assertTrue(actualQty >= 1);
         int expectedQty = docpackingManager.searchDocResult();
         Assert.assertEquals(expectedQty, actualQty);
     }
@@ -363,6 +368,7 @@ public class DocumentsUITest extends TestBase {
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
 
         docpackingManager.addDocument();
+        docpackingManager.listDocTypeForm("STATIC");
         docpackingManager.listOwnerForm(new String[]{"ТХ"});
         docpackingManager.markCategoryPasteAfter("Чек-листы, анкеты, бланки");
         docpackingManager.fileLoad("ЧЕК - ЛИСТ досмотра ВС.pdf");
@@ -378,27 +384,49 @@ public class DocumentsUITest extends TestBase {
         Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
         String author = docpackingManager.getDocumentCreator();
         docpackingManager.pushButton("Back");
-        Helper.wait(3000);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
 
         docpackingManager.pushButton("Show additional filters");
         docpackingManager.textForm("Author", author);
         docpackingManager.pushButton("Search");
 
         int actualQty = docpackingManager.searchDocByOneField(author);
+        Assert.assertTrue(actualQty >= 1);
         int expectedQty = docpackingManager.searchDocResult();
         Assert.assertEquals(expectedQty, actualQty);
     }
+
     @Ignore("Rewrite after develop history-service. Read request on history bookmark (value 'modify')")
     @Test
     public void searchModifierDoc () {
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
-        //возможно стоит создать тут 1 документ и обновить его для целостности проверки
+
+        docpackingManager.addDocument();
+        docpackingManager.listDocTypeForm("STATIC");
+        docpackingManager.listOwnerForm(new String[]{"ЛД"});
+        docpackingManager.markCategoryPasteAfter("Документы по типу ВС");
+        docpackingManager.fileLoad("5541-OVB-FRU.pdf");
+        docpackingManager.docNameField("тех-осмотр-ovb-fru");
+        docpackingManager.listBox("Rule", "INCLUDE");
+        docpackingManager.listBox("Route category", "NO CATEGORY");
+        docpackingManager.listBox("Flight type", "MVL");
+        docpackingManager.listCrewForm("FD");
+        docpackingManager.listBox("Carrier", "S7");
+        docpackingManager.copiesDocRule("2");
+        docpackingManager.pushButton("Save");
+
+        Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
+        String author = docpackingManager.getDocumentCreator();
+        docpackingManager.pushButton("Back");
+
         docpackingManager.pushButton("Show additional filters");
-        docpackingManager.textForm("Modifier", Constant.Ui.SEARCH_DOC_MODIFIER);
+        docpackingManager.textForm("Modifier", author);
         docpackingManager.pushButton("Search");
 
+
         int actualQty = docpackingManager.searchDocByOneField(Constant.Ui.SEARCH_DOC_MODIFIER);
+        Assert.assertTrue(actualQty >= 1);
         int expectedQty = docpackingManager.searchDocResult();
         Assert.assertEquals(expectedQty, actualQty);
     }
@@ -407,14 +435,31 @@ public class DocumentsUITest extends TestBase {
     public void searchDocByTwoFields () {
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
-        //возможно стоит создать тут 1 документ для целостности проверки
+
+        docpackingManager.addDocument();
+        docpackingManager.listOwnerForm(new String[]{"СБП"});
+        docpackingManager.markCategoryPasteAfter("Прочее");
+        docpackingManager.fileLoad("test_file.pdf");
+        docpackingManager.docNameField("сбп-ovb");
+        docpackingManager.listBox("Rule", "INCLUDE");
+        docpackingManager.listBox("Route category", "CIS");
+        docpackingManager.listBox("Flight type", "MVL");
+        docpackingManager.listCrewForm("FD");
+        docpackingManager.listBox("Carrier", "S7");
+        docpackingManager.copiesDocRule("1");
+        docpackingManager.pushButton("Save");
+        Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
+        String author = docpackingManager.getDocumentCreator();
+        docpackingManager.pushButton("Back");
+
         docpackingManager.pushButton("Show additional filters");
-        docpackingManager.textForm("Name", Constant.Ui.SEARCH_DOC_NAME);
-        docpackingManager.listBox("Type", "STATIC");
+        docpackingManager.textForm("Name", "сбп-ovb");
+        docpackingManager.textForm("Author", author);
         docpackingManager.pushButton("Search");
 
-        int actualQty = docpackingManager.searchDocByTwoFields(Constant.Ui.SEARCH_DOC_NAME, Constant.Ui.SEARCH_DOC_TYPE);
+        int actualQty = docpackingManager.searchDocByTwoFields("сбп-ovb", author);
         int expectedQty = docpackingManager.searchDocResult();
+        Assert.assertTrue(actualQty >= 1);
         Assert.assertEquals(expectedQty, actualQty);
     }
 
@@ -422,7 +467,7 @@ public class DocumentsUITest extends TestBase {
     public void searchDocByPeriodOfCreationFrom () {
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
-        String dateFrom = "06122023";
+        String dateFrom = "23012024";
 /*
         docpackingManager.addDocument();
         docpackingManager.listOwnerForm(new String[]{"ТХ"});
@@ -441,7 +486,7 @@ public class DocumentsUITest extends TestBase {
 */
         docpackingManager.dateSearch("Period of creation", "From", dateFrom);
         docpackingManager.pushButton("Search");
-        Helper.wait(1000);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
 
         Assert.assertNotEquals(0, docpackingManager.searchDocResult());
         if (! docpackingManager.isDocumentPresent()) {
@@ -465,10 +510,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Period of creation", "From");
 
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isAfter(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                        .isEqual(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isAfter(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                        .isEqual(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
     }
 
     @Test
@@ -481,10 +526,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Period of creation", "To");
         System.out.println(getDate);
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isBefore(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                                .isEqual(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isBefore(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                                .isEqual(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
     }
 
     @Test
@@ -498,10 +543,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Period of validity", "From");
 
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isAfter(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                                .isEqual(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isAfter(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                                .isEqual(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
     }
 
     @Test
@@ -515,10 +560,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Period of validity", "To");
 
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isBefore(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                        .isEqual(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isBefore(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                        .isEqual(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
     }
 
     @Test
@@ -532,10 +577,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Period of modification", "From");
 
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isAfter(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                                .isEqual(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isAfter(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                                .isEqual(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
     }
 
     @Test
@@ -549,10 +594,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Period of modification", "To");
 
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isBefore(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                        .isEqual(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isBefore(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                        .isEqual(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
     }
 
     @Test
@@ -561,16 +606,15 @@ public class DocumentsUITest extends TestBase {
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
         String searchDate = "15031988";
         docpackingManager.addDocument();
-        docpackingManager.cleanDateForm("Valid from");
         docpackingManager.dateValid("Valid from", searchDate);
 
         String getDate = docpackingManager.getCalendarValue("Valid", "From");
         System.out.println(getDate);
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isAfter(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                                .isEqual(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isAfter(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                                .isEqual(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
     }
 
     @Test
@@ -584,10 +628,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Valid", "To");
         System.out.println(getDate);
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isBefore(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                                .isEqual(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isBefore(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                                .isEqual(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
     }
 
     @Test
@@ -601,10 +645,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Period", "From");
         System.out.println(getDate);
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isAfter(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                                .isEqual(docpackingManager.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isAfter(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                                .isEqual(Helper.parserDate(Constant.Ui.LOWER_DATE_LIMIT)));
     }
 
     @Test
@@ -618,10 +662,10 @@ public class DocumentsUITest extends TestBase {
         String getDate = docpackingManager.getCalendarValue("Period", "To");
         System.out.println(getDate);
         Assert.assertTrue(
-                docpackingManager.parserDate(getDate)
-                        .isBefore(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
-                        docpackingManager.parserDate(getDate)
-                                .isEqual(docpackingManager.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
+                Helper.parserDate(getDate)
+                        .isBefore(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)) ||
+                        Helper.parserDate(getDate)
+                                .isEqual(Helper.parserDate(Constant.Ui.UPPER_DATE_LIMIT)));
     }
 
     @Ignore("Rewrite after develop history-service. Read request on history bookmark (value 'modify')")
@@ -676,18 +720,37 @@ public class DocumentsUITest extends TestBase {
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
 
+        docpackingManager.addDocument();
+        docpackingManager.listOwnerForm(new String[]{"ДОПП"});
+        docpackingManager.markCategoryPasteAfter("Документы по ВС");
+        docpackingManager.fileLoad("test_file.pdf");
+        docpackingManager.docNameField("flight_type_search");
+        docpackingManager.dateValid("Valid from", "01022024");
+        docpackingManager.listBox("Rule", "INCLUDE");
+        docpackingManager.listBox("Route category", "DOM");
+        docpackingManager.listBox("Flight type", "MVL");
+        docpackingManager.listBox("Dep country", "Russian Federation");
+        docpackingManager.listCrewForm("FD");
+        docpackingManager.listBox("Carrier", "GH");
+        docpackingManager.copiesDocRule("1");
+        docpackingManager.pushButton("Save");
+        Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
+        docpackingManager.pushButton("Back");
+
         docpackingManager.pushButton("Show additional filters");
         docpackingManager.listBox("Flight type", "MVL");
         docpackingManager.pushButton("Search");
 
-        Assert.assertNotEquals(0, docpackingManager.searchDocResult());
         if (! docpackingManager.isDocumentPresent()) {
-            System.out.println("по запросу документов не найдено. Сообщение о результатах поиска не корректное");
+            System.out.println("по запросу flight type документов не найдено. Поиск не функционирует");
             Assert.assertTrue(docpackingManager.isDocumentPresent());
+        } else {
+            Assert.assertNotEquals(0, docpackingManager.searchDocResult());
+            int actualQty = docpackingManager.searchDocByDocRuleField("Flight type", "MVL");
+            Assert.assertTrue(actualQty > 0);
+            Assert.assertEquals(docpackingManager.searchDocResult(), actualQty);
         }
-        int actualCount = docpackingManager.searchDocByDocRuleField("Flight type", "MVL");
-        Assert.assertNotEquals(0, actualCount);
-        Assert.assertEquals(docpackingManager.searchDocResult(), actualCount);
     }
 
     @Test
@@ -695,18 +758,37 @@ public class DocumentsUITest extends TestBase {
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
 
+        docpackingManager.addDocument();
+        docpackingManager.listOwnerForm(new String[]{"ТХ"});
+        docpackingManager.markCategoryPasteAfter("Документы по ВС");
+        docpackingManager.fileLoad("test_file.pdf");
+        docpackingManager.docNameField("MVL_to_Belarus");
+        docpackingManager.dateValid("Valid from", "01012024");
+        docpackingManager.listBox("Rule", "INCLUDE");
+        docpackingManager.listBox("Route category", "INT");
+        docpackingManager.listBox("Flight type", "MVL FROM RUSSIA");
+        docpackingManager.listBox("Arr country", "Belarus");
+        docpackingManager.listCrewForm("FD");
+        docpackingManager.listBox("Carrier", "S7");
+        docpackingManager.copiesDocRule("2");
+        docpackingManager.pushButton("Save");
+        Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
+        docpackingManager.pushButton("Back");
+
         docpackingManager.pushButton("Show additional filters");
-        docpackingManager.listBox("Country", "Thailand");
+        docpackingManager.listBox("Country", "Belarus");
         docpackingManager.pushButton("Search");
 
-        Assert.assertNotEquals(0, docpackingManager.searchDocResult());
         if (! docpackingManager.isDocumentPresent()) {
-            System.out.println("по запросу country документов не найдено. Сообщение о результатах поиска не корректное");
+            System.out.println("по запросу country документов не найдено. Поиск не функционирует");
             Assert.assertTrue(docpackingManager.isDocumentPresent());
+        } else {
+            Assert.assertNotEquals(0, docpackingManager.searchDocResult());
+            int actualQty = docpackingManager.searchDocByDocRuleField("Country", "Belarus");
+            Assert.assertTrue(actualQty > 0);
+            Assert.assertEquals(docpackingManager.searchDocResult(), actualQty);
         }
-        int actualCount = docpackingManager.searchDocByDocRuleField("Country", "Thailand");
-        Assert.assertNotEquals(0, actualCount);
-        Assert.assertEquals(docpackingManager.searchDocResult(), actualCount);
     }
 
     @Test
@@ -714,18 +796,38 @@ public class DocumentsUITest extends TestBase {
         DocpackingManager docpackingManager = new DocpackingManager(driver.getDriver());
         Assert.assertTrue(TestBase.isChapterPresent("Documents"));
 
+        docpackingManager.addDocument();
+        docpackingManager.listOwnerForm(new String[]{"ДНО"});
+        docpackingManager.markCategoryPasteAfter("Документы по АП прибытия");
+        docpackingManager.fileLoad("test_file.pdf");
+        docpackingManager.docNameField("arrive_to_Pewek");
+        docpackingManager.description("сходить посмотреть на плавучую АЭС");
+        docpackingManager.dateValid("Valid from", "01012024");
+        docpackingManager.listBox("Rule", "INCLUDE");
+        docpackingManager.listBox("Route category", "DOM");
+        docpackingManager.listBox("Flight type", "VVL");
+        docpackingManager.listBox("Arr airport", "PWE");
+        docpackingManager.listCrewForm("FD");
+        docpackingManager.listBox("Carrier", "S7");
+        docpackingManager.copiesDocRule("1");
+        docpackingManager.pushButton("Save");
+        Helper.notificationControl(Constant.Ui.TOAST_DOCUMENT_CREATED);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
+        docpackingManager.pushButton("Back");
+
         docpackingManager.pushButton("Show additional filters");
-        docpackingManager.listBox("Airport", "AER");
+        docpackingManager.listBox("Airport", "PWE");
         docpackingManager.pushButton("Search");
 
-        Assert.assertNotEquals(0, docpackingManager.searchDocResult());
         if (! docpackingManager.isDocumentPresent()) {
-            System.out.println("по запросу airport документов не найдено. Сообщение о результатах поиска не корректное");
+            System.out.println("по запросу country документов не найдено. Поиск не функционирует");
             Assert.assertTrue(docpackingManager.isDocumentPresent());
+        } else {
+            Assert.assertNotEquals(0, docpackingManager.searchDocResult());
+            int actualQty = docpackingManager.searchDocByDocRuleField("Airport", "PWE");
+            Assert.assertTrue(actualQty > 0);
+            Assert.assertEquals(docpackingManager.searchDocResult(), actualQty);
         }
-        int actualCount = docpackingManager.searchDocByDocRuleField("Airport", "AER");
-        Assert.assertNotEquals(0, actualCount);
-        Assert.assertEquals(docpackingManager.searchDocResult(), actualCount);
     }
 
     @Test
@@ -962,7 +1064,7 @@ public class DocumentsUITest extends TestBase {
         docpackingManager.copiesDocRule("1");
         docpackingManager.pushButton("Save");
 
-        Helper.notificationControl(Constant.Ui.TOAST_INVALID_VALUE);
+        Helper.notificationControl(Constant.Ui.INVALID_VALUE);
     }
 
     @Test
@@ -983,7 +1085,7 @@ public class DocumentsUITest extends TestBase {
         docpackingManager.copiesDocRule("2");
         docpackingManager.pushButton("Save");
 
-        Helper.notificationControl(Constant.Ui.TOAST_INVALID_VALUE);
+        Helper.notificationControl(Constant.Ui.INVALID_VALUE);
     }
 
     @Test
@@ -1078,7 +1180,7 @@ public class DocumentsUITest extends TestBase {
         docpackingManager.copiesDocRule("3");
         docpackingManager.pushButton("Save");
 
-        Helper.notificationControl(Constant.Ui.TOAST_INVALID_VALUE);
+        Helper.notificationControl(Constant.Ui.INVALID_VALUE);
     }
 
     @Test
@@ -1100,7 +1202,7 @@ public class DocumentsUITest extends TestBase {
         docpackingManager.copiesDocRule("2");
         docpackingManager.pushButton("Save");
 
-        Helper.notificationControl(Constant.Ui.TOAST_INVALID_VALUE);
+        Helper.notificationControl(Constant.Ui.INVALID_VALUE);
     }
 
     @Test

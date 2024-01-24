@@ -51,4 +51,5 @@ public class EcrewTrackingSearch {
     public String getEndDate() {
         return endDate;
     }
+
 }

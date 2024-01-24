@@ -62,13 +62,15 @@ public class EcrewTrackingManager {
     }
 
     public void dateSearch (final String dateTitle, final String date) {
+//        String dateXpath = String.format("//label[@tuilabel='%s']" +
+//                "//input[@automation-id='tui-primitive-textfield__native-input']", dateTitle);
         String dateXpath = String.format("//label[@tuilabel='%s']" +
                 "//input[@automation-id='tui-primitive-textfield__native-input']", dateTitle);
         WebElement dateFrm = this.driver.findElement(By.xpath(dateXpath));
         dateFrm.clear();
         dateFrm.click();
         dateFrm.sendKeys(date);
-        Helper.wait(500);
+        Helper.wait(1000);
         String dataCaldrXpath;
         dataCaldrXpath = String.format("(//div[@class='ng-star-inserted']//div[@class='t-item'])[%s]", date.substring(0, 2));
         this.driver.findElement(By.xpath(dataCaldrXpath)).click();
@@ -84,7 +86,7 @@ public class EcrewTrackingManager {
     public int searchDocResult() {
         int result = 0;
         try {
-            final String messageXpath = "//div[@class='search-result']";
+            final String messageXpath = "//div[@class='tui-space_left-5 search-result ng-star-inserted']";
             String qty = this.driver.findElement(By.xpath(messageXpath)).getText();
             String[] array = qty.split(" ");
             result = Integer.parseInt(array[array.length -1]);

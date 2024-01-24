@@ -19,7 +19,7 @@ public class DocRule {
     private boolean isActive;
     private String routeType;
     private String rule;
-    private boolean technicalStop;
+    private boolean isTechnicalStop;
     private String authorFullName;
     private int authorId;
     private String createDate; //"2023-07-28T10:51:21.087"
@@ -35,231 +35,199 @@ public class DocRule {
 
         }
 
-    public Integer getAircraftId() {
+    public int getAircraftId() {
         return aircraftId;
     }
+    public void setAircraftId(int aircraftId) {
+        this.aircraftId = aircraftId;
+    }
 
-    public Integer getAirlineId() {
+    public int getAirlineId() {
         return airlineId;
+    }
+    public void setAirlineId(int airlineId) {
+        this.airlineId = airlineId;
     }
 
     public String getArrAirports() {
         return arrAirports;
     }
+    public void setArrAirports(String arrAirports) {
+        this.arrAirports = arrAirports;
+    }
 
     public int getBoard() {
         return board;
+    }
+    public void setBoard(int board) {
+        this.board = board;
     }
 
     public String getCapCY() {
         return capCY;
     }
+    public void setCapCY(String capCY) {
+        this.capCY = capCY;
+    }
 
-    public Integer getCopies() {
+    public int getCopies() {
         return copies;
     }
+    public void setCopies(int copies) {
+        this.copies = copies;
+    }
 
-    public Integer getCountryArrId() {
+    public int getCountryArrId() {
         return countryArrId;
     }
-
-    public Integer getCountryDepId() {
-        return countryDepId;
+    public void setCountryArrId(int countryArrId) {
+        this.countryArrId = countryArrId;
     }
 
-    public Integer getCrewRouteCategoryId() {
+    public int getCountryDepId() {
+        return countryDepId;
+    }
+    public void setCountryDepId(int countryDepId) {
+        this.countryDepId = countryDepId;
+    }
+
+    public int getCrewRouteCategoryId() {
         return crewRouteCategoryId;
+    }
+    public void setCrewRouteCategoryId(int crewRouteCategoryId) {
+        this.crewRouteCategoryId = crewRouteCategoryId;
     }
 
     public String getCrewType() {
         return crewType;
     }
+    public void setCrewType(String crewType) {
+        this.crewType = crewType;
+    }
 
     public String getDateEnd() {
         return dateEnd;
+    }
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public String getDateStart() {
         return dateStart;
     }
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
+    }
 
     public String getDepAirports() {
         return depAirports;
+    }
+    public void setDepAirports(String depAirports) {
+        this.depAirports = depAirports;
     }
 
     public String getFlightNumbers() {
         return flightNumbers;
     }
+    public void setFlightNumbers(String flightNumbers) {
+        this.flightNumbers = flightNumbers;
+    }
 
     public String getFlightType() {
         return flightType;
     }
+    public void setFlightType(String flightType) {
+        this.flightType = flightType;
+    }
 
-    public Boolean getIsActive() {
+    public boolean getIsActive() {
         return isActive;
+    }
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getRouteType() {
         return routeType;
     }
+    public void setRouteType(String routeType) {
+        this.routeType = routeType;
+    }
 
     public String getRule() {
         return rule;
     }
+    public void setRule(String rule) {
+        this.rule = rule;
+    }
 
-    public Boolean getTechnicalStop() {
-        return technicalStop;
+    public boolean getIsTechnicalStop() {
+        return isTechnicalStop;
+    }
+    public void setIsTechnicalStop(boolean isTechnicalStop) {
+        this.isTechnicalStop = isTechnicalStop;
     }
 
     public String getAuthorFullName() {
         return authorFullName;
     }
+    public void setAuthorFullName(String authorFullName) {
+        this.authorFullName = authorFullName;
+    }
 
     public int getAuthorId() {
         return authorId;
+    }
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
     public String getCreateDate() {
         return createDate;
     }
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
 
     public int getDocId() {
         return docId;
+    }
+    public void setDocId(int docId) {
+        this.docId = docId;
     }
 
     public Integer getDocTemplateId() {
         return docTemplateId;
     }
+    public void setDocTemplateId(Integer docTemplateId) {
+        this.docTemplateId = docTemplateId;
+    }
 
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getModifyAuthorFullName() {
         return modifyAuthorFullName;
     }
+    public void setModifyAuthorFullName(String modifyAuthorFullName) {
+        this.modifyAuthorFullName = modifyAuthorFullName;
+    }
 
     public int getModifyAuthorId() {
         return modifyAuthorId;
+    }
+    public void setModifyAuthorId(int modifyAuthorId) {
+        this.modifyAuthorId = modifyAuthorId;
     }
 
     public String getModifyDate() {
         return modifyDate;
     }
-
-
-
-    public void setAircraftId(Integer aircraftId) {
-        this.aircraftId = aircraftId;
-    }
-
-    public void setAirlineId(Integer airlineId) {
-        this.airlineId = airlineId;
-    }
-
-    public void setArrAirports(String arrAirports) {
-        this.arrAirports = arrAirports;
-    }
-
-    public void setBoard(int board) {
-        this.board = board;
-    }
-
-    public void setCapCY(String capCY) {
-        this.capCY = capCY;
-    }
-
-    public void setCopies(Integer copies) {
-        this.copies = copies;
-    }
-
-    public void setCountryArrId(Integer countryArrId) {
-        this.countryArrId = countryArrId;
-    }
-
-    public void setCountryDepId(Integer countryDepId) {
-        this.countryDepId = countryDepId;
-    }
-
-    public void setCrewRouteCategoryId(Integer crewRouteCategoryId) {
-        this.crewRouteCategoryId = crewRouteCategoryId;
-    }
-
-    public void setCrewType(String crewType) {
-        this.crewType = crewType;
-    }
-
-    public void setDateEnd(String dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
-    public void setDateStart(String dateStart) {
-        this.dateStart = dateStart;
-    }
-
-    public void setDepAirports(String depAirports) {
-        this.depAirports = depAirports;
-    }
-
-    public void setFlightNumbers(String flightNumbers) {
-        this.flightNumbers = flightNumbers;
-    }
-
-    public void setFlightType(String flightType) {
-        this.flightType = flightType;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
-    }
-
-    public void setRouteType(String routeType) {
-        this.routeType = routeType;
-    }
-
-    public void setRule(String rule) {
-        this.rule = rule;
-    }
-
-    public void setAuthorFullName(String authorFullName) {
-        this.authorFullName = authorFullName;
-    }
-
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
-
-    public void setDocId(int docId) {
-        this.docId = docId;
-    }
-
-    public void setDocTemplateId(Integer docTemplateId) {
-        this.docTemplateId = docTemplateId;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setModifyAuthorFullName(String modifyAuthorFullName) {
-        this.modifyAuthorFullName = modifyAuthorFullName;
-    }
-
-    public void setModifyAuthorId(int modifyAuthorId) {
-        this.modifyAuthorId = modifyAuthorId;
-    }
-
     public void setModifyDate(String modifyDate) {
         this.modifyDate = modifyDate;
     }
-
-    public void setTechnicalStop(Boolean technicalStop) {
-        this.technicalStop = technicalStop;
-    }
-
-
 }

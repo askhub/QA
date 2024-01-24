@@ -16,8 +16,8 @@ public class DocTemplateCreateForm extends DocumentsPackingBaseForm {
         doc.setDocOwnerIds(Collections.singletonList(6));
         doc.setValidityPeriodStart("2023-07-01T00:00:01.001Z");
         doc.setValidityPeriodEnd("2023-10-31T23:59:59.999Z");
-        doc.setWhitePage(false);
-        doc.setReplaceWhitePage(false);
+        doc.setIsWhitePage(false);
+        doc.setIsReplaceWhitePage(false);
 
         return doc;
     }
@@ -34,8 +34,8 @@ public class DocTemplateCreateForm extends DocumentsPackingBaseForm {
         doc.setDocOwnerIds(Collections.singletonList(5));
         doc.setValidityPeriodStart("2023-07-01T00:00:01.001Z");
         doc.setValidityPeriodEnd("2023-08-31T23:59:59.999Z");
-        doc.setWhitePage(false);
-        doc.setReplaceWhitePage(false);
+        doc.setIsWhitePage(false);
+        doc.setIsReplaceWhitePage(false);
 
         return doc;
     }
@@ -50,9 +50,9 @@ public class DocTemplateCreateForm extends DocumentsPackingBaseForm {
         doc.setDocFile("A+a=");
         doc.setDescription("api test document 3 with rule");
         doc.setValidityPeriodStart("2023-07-01T00:00:01.001Z");
-        doc.setValidityPeriodEnd("2023-11-30T23:59:59.999Z");
-        doc.setWhitePage(false);
-        doc.setReplaceWhitePage(false);
+        doc.setValidityPeriodEnd("2023-12-31T23:59:59.999Z");
+        doc.setIsWhitePage(false);
+        doc.setIsReplaceWhitePage(false);
         doc.setIsActive(true);
         doc.setPrevDocId(null);
 
@@ -68,8 +68,8 @@ public class DocTemplateCreateForm extends DocumentsPackingBaseForm {
         doc.setDocCategoryId(10);
         doc.setDocFile("Jh+gqdZH9Wvw77V5npj363+tfLu+W5ndGggNDkvTiAxL1R5cGUvT2KJSVFT0YNCg");
         doc.setValidityPeriodStart("2023-07-01T00:00:01.001Z");
-        doc.setWhitePage(false);
-        doc.setReplaceWhitePage(false);
+        doc.setIsWhitePage(false);
+        doc.setIsReplaceWhitePage(false);
         doc.setIsActive(true);
         doc.setPrevDocId(null);
 
@@ -91,8 +91,8 @@ public class DocTemplateCreateForm extends DocumentsPackingBaseForm {
         doc.setDocCategoryId(docCategoryId);
         doc.setDocFile("A+a=");
         doc.setValidityPeriodStart("2023-09-01T00:00:01.001Z");
-        doc.setWhitePage(false);
-        doc.setReplaceWhitePage(false);
+        doc.setIsWhitePage(false);
+        doc.setIsReplaceWhitePage(false);
         doc.setIsActive(true);
         doc.setPrevDocId(null);
 

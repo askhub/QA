@@ -14,12 +14,14 @@ public class EcrewTrackingUITest extends TestBase {
 
     @Before
     public void choiceChapter () {
-        headerLink("ECrew Tracking");
+        headerLink("eCrew tracking");
     }
     @After
     public void goToMainChapter () {
-        headerLink("ECrew Tracking");
+        headerLink("eCrew tracking");
     }
+
+
 
     @Test
     public void searchByFlightNumberField () {
@@ -38,14 +40,19 @@ public class EcrewTrackingUITest extends TestBase {
 
     @Test
     public void searchByDateField () {
+
         EcrewTrackingManager ecrewTrackingManager = new EcrewTrackingManager(driver.getDriver());
-        ecrewTrackingManager.dateSearch("Date to", Constant.Ui.SEARCH_LEG_DATE);
+        ecrewTrackingManager.dateSearch("Date to", "12012024");
         ecrewTrackingManager.dateSearch("Date from", Constant.Ui.SEARCH_LEG_DATE);
+        ecrewTrackingManager.textForm("Flight number", "5106");
+        //ecrewTrackingManager.dateSearch("Date from", Constant.Ui.SEARCH_LEG_DATE);
         ecrewTrackingManager.pushButton("Search");
 
         int actualQty = ecrewTrackingManager.searchDocByOneField(ecrewTrackingManager.dateFormatConverter(Constant.Ui.SEARCH_LEG_DATE));
         int expectedQty = ecrewTrackingManager.searchDocResult();
         Assert.assertEquals(expectedQty, actualQty);
+
+
     }
 
     @Test
@@ -57,7 +64,7 @@ public class EcrewTrackingUITest extends TestBase {
         Assert.assertEquals(expectQty, actualQty);
     }
 
-    @Ignore ("UI search by crew doesn't work ")
+    @Ignore ("UI search by crew is enable ")
     @Test
     public void searchByCrewField () {
         EcrewTrackingManager ecrewTrackingManager = new EcrewTrackingManager(driver.getDriver());
@@ -80,15 +87,17 @@ public class EcrewTrackingUITest extends TestBase {
         Assert.assertEquals(expectedQty, actualQty);
     }
 
-    @Ignore ("UI send mail doesn't work ")
+    //@Ignore ("UI send mail doesn't work ")
     @Test
     public void sendTaskToEmail () {
         EcrewTrackingManager ecrewTrackingManager = new EcrewTrackingManager(driver.getDriver());
+        //пока не формируются текущие леги нужно расширить диапазон поиска по датам
+        ecrewTrackingManager.dateSearch("Date from", "01062023");
         ecrewTrackingManager.textForm("Flight number", Constant.Ui.SEARCH_LEG_FLIGHT_NUMBER);
         ecrewTrackingManager.pushButton("Search");
-        Helper.wait(3000);
+        Helper.wait(2000);
         ecrewTrackingManager.sendEmail(Constant.Ui.E_MAIL);
-        // дождаться сообщения об отправке
+        Helper.notificationControl(Constant.Ui.TOAST_SEND_MESSAGE);
     }
 
     @Ignore ("UI download flight deck doesn't work ")

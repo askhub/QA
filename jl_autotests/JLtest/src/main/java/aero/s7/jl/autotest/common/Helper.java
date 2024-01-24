@@ -11,10 +11,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class Helper extends TestBase {
@@ -28,13 +34,21 @@ public class Helper extends TestBase {
     }
 
     public static void notificationControl (String expectedMessage) {
-        //String key = expectedMessage.split(" ", 2)[0];
         Wait<WebDriver> wait = new WebDriverWait(driver.getDriver(), Duration.ofSeconds(20));
         WebElement toast = wait.until(visibilityOfElementLocated(By.xpath(String.format("//div[contains(text(),'%s')]", expectedMessage))));
         String actualMessage = toast.getText();
 
-        Helper.wait(2000);
+        //Helper.wait(Constant.Ui.MIDDLE_PAUSE);
         Assert.assertEquals(expectedMessage, actualMessage);
+    }
+
+    public static void modalWindowMessageControl (final String expected) {
+        Wait<WebDriver> wait = new WebDriverWait(driver.getDriver(), Duration.ofSeconds(20));
+        WebElement toast = wait.until(visibilityOfElementLocated(By.xpath("//div[@class='tui-space_bottom-4 tui-space_top-4']")));
+        String actual = toast.getText();
+        Assert.assertTrue(actual.contains(expected));
+        //return actual.contains(expected);
+
     }
 
     public static int getMaxSortIndex() {
@@ -55,5 +69,12 @@ public class Helper extends TestBase {
         }
         return max;
     }
+
+    public static LocalDate parserDate(final String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return LocalDate.parse(date, formatter);
+    }
+
+
 
 }

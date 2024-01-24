@@ -33,8 +33,8 @@ public class DocumentsPackingServiceImpl implements DocumentsPackingService {
                     .body(form)
                     .post("/api/configuration/documents/with-rules")
                 .then()
-                    .log().all()
-                    //.statusCode(201)
+                    //.log().all()
+                    .statusCode(201)
                     .extract().as(DocumentsPacking.class);
     }
 

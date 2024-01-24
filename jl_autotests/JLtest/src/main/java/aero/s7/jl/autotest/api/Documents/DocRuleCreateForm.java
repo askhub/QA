@@ -20,7 +20,7 @@ public class DocRuleCreateForm extends DocumentsPackingBaseForm {
         docRule.setCopies(1);
         docRule.setDateStart("2023-08-01T00:00:00.001");
         docRule.setDateEnd("2023-11-30T23:59:59.999");
-        docRule.setTechnicalStop(false);
+        docRule.setIsTechnicalStop(false);
         docRule.setIsActive(true);
 
         return docRule;
@@ -44,8 +44,8 @@ public class DocRuleCreateForm extends DocumentsPackingBaseForm {
         docRule.setAirlineId(1094);
         docRule.setCopies(1);
         docRule.setDateStart("2023-08-01T00:00:00.001");
-        docRule.setDateEnd("2023-10-31T23:59:59.999");
-        docRule.setTechnicalStop(false);
+        docRule.setDateEnd("2023-12-31T23:59:59.999");
+        docRule.setIsTechnicalStop(false);
         docRule.setIsActive(true);
 
         return docRule;

@@ -15,8 +15,8 @@ public class DocumentsPackingBaseForm {
         public Integer prevDocId;
         public String validityPeriodEnd; //"2023-07-21T05:01:55.135Z"
         public String validityPeriodStart;
-        public Boolean whitePage;
-        public Boolean replaceWhitePage;
+        public Boolean isWhitePage;
+        public Boolean isReplaceWhitePage;
         public List<Integer> docRulesIds;
         public List<Integer> docTemplateParamsIds;
         public int id;
@@ -48,7 +48,7 @@ public class DocumentsPackingBaseForm {
         public String flightType;
         public String routeType;
         public String rule; // EXCLUDE, INCLUDE
-        public Boolean technicalStop;
+        public Boolean isTechnicalStop;
 
 
         public DocumentsPackingBaseForm() {
@@ -58,352 +58,308 @@ public class DocumentsPackingBaseForm {
         public String getDescription() {
                 return description;
         }
+        public void setDescription(String description) {
+                this.description = description;
+        }
 
         public Integer getDocCategoryId() {
                 return docCategoryId;
+        }
+        public void setDocCategoryId(Integer docCategoryId) {
+                this.docCategoryId = docCategoryId;
         }
 
         public String getDocFile() {
                 return docFile;
         }
+        public void setDocFile(String docFile) {
+                this.docFile = docFile;
+        }
 
         public int getDocFileId() {
                 return docFileId;
+        }
+        public void setDocFileId(int docFileId) {
+                this.docFileId = docFileId;
         }
 
         public List<Integer> getDocOwnerIds() {
                 return docOwnerIds;
         }
+        public void setDocOwnerIds(List<Integer> docOwnerIds) {
+                this.docOwnerIds = docOwnerIds;
+        }
 
         public String getDocType() {
                 return docType;
+        }
+        public void setDocType(String docType) {
+                this.docType = docType;
         }
 
         public Boolean getIsActive() {
                 return isActive;
         }
+        public void setIsActive(Boolean isActive) {
+                this.isActive = isActive;
+        }
 
         public String getName() {
                 return name;
+        }
+        public void setName(String name) {
+                this.name = name;
         }
 
         public Integer getPrevDocId() {
                 return prevDocId;
         }
+        public void setPrevDocId(Integer prevDocId) {
+                this.prevDocId = prevDocId;
+        }
 
         public String getValidityPeriodEnd() {
                 return validityPeriodEnd;
+        }
+        public void setValidityPeriodEnd(String validityPeriodEnd) {
+                this.validityPeriodEnd = validityPeriodEnd;
         }
 
         public String getValidityPeriodStart() {
                 return validityPeriodStart;
         }
-
-        public Boolean getWhitePage() {
-                return whitePage;
+        public void setValidityPeriodStart(String validityPeriodStart) {
+                this.validityPeriodStart = validityPeriodStart;
         }
 
-        public Boolean getReplaceWhitePage() {
-                return replaceWhitePage;
+        public Boolean getIsWhitePage() {
+                return isWhitePage;
+        }
+        public void setIsWhitePage(Boolean isWhitePage) {
+                this.isWhitePage = isWhitePage;
+        }
+
+        public Boolean getIsReplaceWhitePage() {
+                return isReplaceWhitePage;
+        }
+        public void setIsReplaceWhitePage(Boolean isReplaceWhitePage) {
+                this.isReplaceWhitePage = isReplaceWhitePage;
         }
 
         public List<Integer> getDocRulesIds() {
                 return docRulesIds;
         }
+        public void setDocRulesIds(List<Integer> docRulesIds) {
+                this.docRulesIds = docRulesIds;
+        }
 
         public List<Integer> getDocTemplateParamsIds() {
                 return docTemplateParamsIds;
+        }
+        public void setDocTemplateParamsIds(List<Integer> docTemplateParamsIds) {
+                this.docTemplateParamsIds = docTemplateParamsIds;
         }
 
         public int getId() {
                 return id;
         }
+        public void setId(int id) {
+                this.id = id;
+        }
 
         public String getAuthorFullName() {
                 return authorFullName;
+        }
+        public void setAuthorFullName(String authorFullName) {
+                this.authorFullName = authorFullName;
         }
 
         public int getAuthorId() {
                 return authorId;
         }
+        public void setAuthorId(int authorId) {
+                this.authorId = authorId;
+        }
 
         public String getAuthorName() {
                 return authorName;
+        }
+        public void setAuthorName(String authorName) {
+                this.authorName = authorName;
         }
 
         public String getCreateDate() {
                 return createDate;
         }
+        public void setCreateDate(String createDate) {
+                this.createDate = createDate;
+        }
 
         public String getModifyAuthorFullName() {
                 return modifyAuthorFullName;
+        }
+        public void setModifyAuthorFullName(String modifyAuthorFullName) {
+                this.modifyAuthorFullName = modifyAuthorFullName;
         }
 
         public int getModifyAuthorId() {
                 return modifyAuthorId;
         }
+        public void setModifyAuthorId(int modifyAuthorId) {
+                this.modifyAuthorId = modifyAuthorId;
+        }
 
         public String getModifyDate() {
                 return modifyDate;
+        }
+        public void setModifyDate(String modifyDate) {
+                this.modifyDate = modifyDate;
         }
 
         public int getSortIndex() {
                 return sortIndex;
         }
+        public void setSortIndex(int sortIndex) {
+                this.sortIndex = sortIndex;
+        }
 
         public int getAircraftId() {
                 return aircraftId;
+        }
+        public void setAircraftId(int aircraftId) {
+                this.aircraftId = aircraftId;
         }
 
         public int getAirlineId() {
                 return airlineId;
         }
+        public void setAirlineId(int airlineId) {
+                this.airlineId = airlineId;
+        }
 
         public String getArrAirports() {
                 return arrAirports;
+        }
+        public void setArrAirports(String arrAirports) {
+                this.arrAirports = arrAirports;
         }
 
         public String getCapCY() {
                 return capCY;
         }
+        public void setCapCY(String capCY) {
+                this.capCY = capCY;
+        }
 
         public int getCopies() {
                 return copies;
+        }
+        public void setCopies(int copies) {
+                this.copies = copies;
         }
 
         public int getCountryArrId() {
                 return countryArrId;
         }
+        public void setCountryArrId(int countryArrId) {
+                this.countryArrId = countryArrId;
+        }
 
         public int getCountryDepId() {
                 return countryDepId;
+        }
+        public void setCountryDepId(int countryDepId) {
+                this.countryDepId = countryDepId;
         }
 
         public int getCrewRouteCategoryId() {
                 return crewRouteCategoryId;
         }
+        public void setCrewRouteCategoryId(int crewRouteCategoryId) {
+                this.crewRouteCategoryId = crewRouteCategoryId;
+        }
 
         public String getCrewType() {
                 return crewType;
         }
-
-        public String getDateEnd() {
-                return dateEnd;
-        }
-
-        public String getDateStart() {
-                return dateStart;
-        }
-
-        public String getDepAirports() {
-                return depAirports;
-        }
-
-        public int getDocId() {
-                return docId;
-        }
-
-        public int getDocTemplateId() {
-                return docTemplateId;
-        }
-
-        public String getFlightNumbers() {
-                return flightNumbers;
-        }
-
-        public String getFlightType() {
-                return flightType;
-        }
-
-        public String getRouteType() {
-                return routeType;
-        }
-
-        public String getRule() {
-                return rule;
-        }
-
-        public Boolean getTechnicalStop() {
-                return technicalStop;
+        public void setCrewType(String crewType) {
+                this.crewType = crewType;
         }
 
         public int getBoard() {
                 return board;
         }
-
-        public void setDescription(String description) {
-                this.description = description;
+        public void setBoard(int board) {
+                this.board = board;
         }
 
-        public void setDocCategoryId(Integer docCategoryId) {
-                this.docCategoryId = docCategoryId;
+        public String getDateEnd() {
+                return dateEnd;
         }
-
-        public void setDocFile(String docFile) {
-                this.docFile = docFile;
-        }
-
-        public void setDocFileId(int docFileId) {
-                this.docFileId = docFileId;
-        }
-
-        public void setDocOwnerIds(List<Integer> docOwnerIds) {
-                this.docOwnerIds = docOwnerIds;
-        }
-
-        public void setDocType(String docType) {
-                this.docType = docType;
-        }
-
-        public void setIsActive(Boolean isActive) {
-                this.isActive = isActive;
-        }
-
-        public void setName(String name) {
-                this.name = name;
-        }
-
-        public void setPrevDocId(Integer prevDocId) {
-                this.prevDocId = prevDocId;
-        }
-
-        public void setValidityPeriodEnd(String validityPeriodEnd) {
-                this.validityPeriodEnd = validityPeriodEnd;
-        }
-
-        public void setValidityPeriodStart(String validityPeriodStart) {
-                this.validityPeriodStart = validityPeriodStart;
-        }
-
-        public void setWhitePage(Boolean whitePage) {
-                this.whitePage = whitePage;
-        }
-
-        public void setReplaceWhitePage(Boolean replaceWhitePage) {
-                this.replaceWhitePage = replaceWhitePage;
-        }
-
-        public void setDocRulesIds(List<Integer> docRulesIds) {
-                this.docRulesIds = docRulesIds;
-        }
-
-        public void setDocTemplateParamsIds(List<Integer> docTemplateParamsIds) {
-                this.docTemplateParamsIds = docTemplateParamsIds;
-        }
-
-        public void setId(int id) {
-                this.id = id;
-        }
-
-        public void setAuthorFullName(String authorFullName) {
-                this.authorFullName = authorFullName;
-        }
-
-        public void setAuthorId(int authorId) {
-                this.authorId = authorId;
-        }
-
-        public void setAuthorName(String authorName) {
-                this.authorName = authorName;
-        }
-
-        public void setCreateDate(String createDate) {
-                this.createDate = createDate;
-        }
-
-        public void setModifyAuthorFullName(String modifyAuthorFullName) {
-                this.modifyAuthorFullName = modifyAuthorFullName;
-        }
-
-        public void setModifyAuthorId(int modifyAuthorId) {
-                this.modifyAuthorId = modifyAuthorId;
-        }
-
-        public void setModifyDate(String modifyDate) {
-                this.modifyDate = modifyDate;
-        }
-
-        public void setSortIndex(int sortIndex) {
-                this.sortIndex = sortIndex;
-        }
-
-        public void setAircraftId(int aircraftId) {
-                this.aircraftId = aircraftId;
-        }
-
-        public void setAirlineId(int airlineId) {
-                this.airlineId = airlineId;
-        }
-
-        public void setArrAirports(String arrAirports) {
-                this.arrAirports = arrAirports;
-        }
-
-        public void setCapCY(String capCY) {
-                this.capCY = capCY;
-        }
-
-        public void setCopies(int copies) {
-                this.copies = copies;
-        }
-
-        public void setCountryArrId(int countryArrId) {
-                this.countryArrId = countryArrId;
-        }
-
-        public void setCountryDepId(int countryDepId) {
-                this.countryDepId = countryDepId;
-        }
-
-        public void setCrewRouteCategoryId(int crewRouteCategoryId) {
-                this.crewRouteCategoryId = crewRouteCategoryId;
-        }
-
-        public void setCrewType(String crewType) {
-                this.crewType = crewType;
-        }
-
         public void setDateEnd(String dateEnd) {
                 this.dateEnd = dateEnd;
         }
 
+        public String getDateStart() {
+                return dateStart;
+        }
         public void setDateStart(String dateStart) {
                 this.dateStart = dateStart;
         }
 
+        public String getDepAirports() {
+                return depAirports;
+        }
         public void setDepAirports(String depAirports) {
                 this.depAirports = depAirports;
         }
 
+        public int getDocId() {
+                return docId;
+        }
         public void setDocId(int docId) {
                 this.docId = docId;
         }
 
+        public int getDocTemplateId() {
+                return docTemplateId;
+        }
         public void setDocTemplateId(int docTemplateId) {
                 this.docTemplateId = docTemplateId;
         }
 
+        public String getFlightNumbers() {
+                return flightNumbers;
+        }
         public void setFlightNumbers(String flightNumbers) {
                 this.flightNumbers = flightNumbers;
         }
 
+        public String getFlightType() {
+                return flightType;
+        }
         public void setFlightType(String flightType) {
                 this.flightType = flightType;
         }
 
+        public String getRouteType() {
+                return routeType;
+        }
         public void setRouteType(String routeType) {
                 this.routeType = routeType;
         }
 
+        public String getRule() {
+                return rule;
+        }
         public void setRule(String rule) {
                 this.rule = rule;
         }
 
-        public void setTechnicalStop(Boolean technicalStop) {
-                this.technicalStop = technicalStop;
+        public Boolean getIsTechnicalStop() {
+                return isTechnicalStop;
         }
-
-        public void setBoard(int board) {
-                this.board = board;
+        public void setIsTechnicalStop(Boolean isTechnicalStop) {
+                this.isTechnicalStop = isTechnicalStop;
         }
 }

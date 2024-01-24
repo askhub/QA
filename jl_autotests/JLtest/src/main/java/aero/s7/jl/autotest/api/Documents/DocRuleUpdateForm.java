@@ -28,7 +28,7 @@ public class DocRuleUpdateForm extends DocRule{
         ruleForm.setCopies(2);
         ruleForm.setDateStart("2023-09-01T00:00:01.001");
         ruleForm.setDateEnd("2023-11-30T00:00:01.001");
-        ruleForm.setTechnicalStop(true);
+        ruleForm.setIsTechnicalStop(true);
 
         return ruleForm;
     }

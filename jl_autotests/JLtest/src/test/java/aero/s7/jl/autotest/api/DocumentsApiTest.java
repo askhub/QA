@@ -69,8 +69,8 @@ public class DocumentsApiTest extends TestBase {
                 documentsPacking.getValidityPeriodStart());
         Assert.assertEquals(DocTemplateCreateForm.newDocWithRule().getValidityPeriodEnd(),
                 documentsPacking.getValidityPeriodEnd());
-        Assert.assertEquals(DocTemplateCreateForm.newDocWithRule().getWhitePage(),
-                documentsPacking.getWhitePage());
+        Assert.assertEquals(DocTemplateCreateForm.newDocWithRule().getIsWhitePage(),
+                documentsPacking.getIsWhitePage());
         Assert.assertEquals(DocTemplateCreateForm.newDocWithRule().getIsActive(),
                 documentsPacking.getIsActive());
 
@@ -90,7 +90,7 @@ public class DocumentsApiTest extends TestBase {
         Assert.assertEquals(Optional.of(DocRuleCreateForm.newDocRule().getCopies()), Optional.of(rule.getCopies()));
         Assert.assertEquals(DocRuleCreateForm.newDocRule().getDateStart(), rule.getDateStart());
         Assert.assertEquals(DocRuleCreateForm.newDocRule().getDateEnd(), rule.getDateEnd());
-        Assert.assertEquals(DocRuleCreateForm.newDocRule().getTechnicalStop(), rule.getTechnicalStop());
+        Assert.assertEquals(DocRuleCreateForm.newDocRule().getIsTechnicalStop(), rule.getIsTechnicalStop());
         Assert.assertEquals(DocRuleCreateForm.newDocRule().getIsActive(), rule.getIsActive());
     }
 
@@ -115,8 +115,8 @@ public class DocumentsApiTest extends TestBase {
                 Optional.of(document.getValidityPeriodStart()));
         Assert.assertEquals(Optional.of(DocTemplateCreateForm.newDocWithRequiredFieldsOnly().getDocType()),
                 Optional.of(document.getDocType()));
-        Assert.assertEquals(Optional.of(DocTemplateCreateForm.newDocWithRequiredFieldsOnly().getWhitePage()),
-                Optional.of(document.getWhitePage()));
+        Assert.assertEquals(Optional.of(DocTemplateCreateForm.newDocWithRequiredFieldsOnly().getIsWhitePage()),
+                Optional.of(document.getIsWhitePage()));
 
         Assert.assertEquals(Optional.of(DocRuleCreateForm.newDocRuleWithRequiredFieldsOnly().getRule()),
                 Optional.of(rule.getRule()));
@@ -140,7 +140,7 @@ public class DocumentsApiTest extends TestBase {
         DocumentsPacking documentUpdate = documentsPackingService.updateDocument(DocTemplateUpdateForm.updateDocument(documentsPacking.getId()));
 
         Assert.assertEquals(DocTemplateUpdateForm.updateDocument(documentsPacking.getId()).getName(), documentUpdate.getName());
-        Assert.assertEquals(DocTemplateUpdateForm.updateDocument(documentsPacking.getId()).getWhitePage(), documentUpdate.getWhitePage());
+        Assert.assertEquals(DocTemplateUpdateForm.updateDocument(documentsPacking.getId()).getIsWhitePage(), documentUpdate.getIsWhitePage());
         Assert.assertEquals(DocTemplateUpdateForm.updateDocument(documentsPacking.getId()).getValidityPeriodStart(), documentUpdate.getValidityPeriodStart());
 
     }
@@ -175,7 +175,7 @@ public class DocumentsApiTest extends TestBase {
                 Optional.of(docRuleUpdate.getCopies()));
         Assert.assertEquals(DocRuleUpdateForm.updateDocRule(documentsPacking.getDocRulesIds().get(0)).getDateStart(), docRuleUpdate.getDateStart());
         Assert.assertEquals(DocRuleUpdateForm.updateDocRule(documentsPacking.getDocRulesIds().get(0)).getDateEnd(), docRuleUpdate.getDateEnd());
-        Assert.assertEquals(DocRuleUpdateForm.updateDocRule(documentsPacking.getDocRulesIds().get(0)).getTechnicalStop(), docRuleUpdate.getTechnicalStop());
+        Assert.assertEquals(DocRuleUpdateForm.updateDocRule(documentsPacking.getDocRulesIds().get(0)).getIsTechnicalStop(), docRuleUpdate.getIsTechnicalStop());
     }
 
     @Test
@@ -469,8 +469,8 @@ public class DocumentsApiTest extends TestBase {
         for (DocTemplateData docTemplateData : docList) {
             for (int i = 0; i < docTemplateData.getDocRulesIds().size(); i++) {
                 DocRule docRule = documentsPackingService.getDocRule(docTemplateData.getDocRulesIds().get(i));
-                if ((docRule.getCountryArrId().equals(searchRequest.getCountry())) ||
-                        (docRule.getCountryDepId().equals(searchRequest.getCountry()))) {
+                if ((docRule.getCountryArrId() == searchRequest.getCountry()) ||
+                        (docRule.getCountryDepId() == searchRequest.getCountry())) {
                     count++;
                     break;
                 }
@@ -568,7 +568,7 @@ public class DocumentsApiTest extends TestBase {
         for (DocTemplateData docTemplateData : docList) {
             for (int i = 0; i < docTemplateData.getDocRulesIds().size(); i++) {
                 DocRule docRule = documentsPackingService.getDocRule(docTemplateData.getDocRulesIds().get(i));
-                if (docRule.getCrewRouteCategoryId().equals(searchRequest.getCrewRouteCategoryId())) {
+                if (docRule.getCrewRouteCategoryId() == searchRequest.getCrewRouteCategoryId()) {
                     count++;
                     break;
                 }
@@ -589,7 +589,7 @@ public class DocumentsApiTest extends TestBase {
         Assert.assertNotNull(rule);
 
         DocumentsPackingSearch searchRequest = new DocumentsPackingSearchBuilder(true)
-                .setTechnicalStop(rule.getTechnicalStop())
+                .setTechnicalStop(rule.getIsTechnicalStop())
                 .build();
         List<DocTemplateData> docList = documentsPackingService.searchDocument(searchRequest);
         Assert.assertTrue(docList.size() > 0);
@@ -597,12 +597,11 @@ public class DocumentsApiTest extends TestBase {
         for (DocTemplateData docTemplateData : docList) {
             for (int i = 0; i < docTemplateData.getDocRulesIds().size(); i++) {
                 DocRule docRule = documentsPackingService.getDocRule(docTemplateData.getDocRulesIds().get(i));
-                if (docRule.getTechnicalStop() != null) {
-                    if (docRule.getTechnicalStop().equals(searchRequest.getIsTechnicalStop())) {
-                        count++;
-                        break;
-                    }
+                if (docRule.getIsTechnicalStop() ==  searchRequest.getIsTechnicalStop()) {
+                    count++;
+                    break;
                 }
+
             }
             Assert.assertNotEquals(0, count);
         }

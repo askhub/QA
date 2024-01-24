@@ -106,6 +106,8 @@ public class SettingsServiceImpl implements SettingsService {
         return response.statusCode() == 409;
     }
 
+
+
     @Override
     public List<TdTs> getAllDeclarations() {
         Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
@@ -173,20 +175,37 @@ public class SettingsServiceImpl implements SettingsService {
         Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
         final Response response = RestAssured.given()
             .when()
-                .pathParam("id", id)
+                .pathParam("transportDeclarationId", id)
                 .body(form)
-                .put("/api/configuration/transport-declarations/{id}");
+                .put("/api/configuration/transport-declarations/{transportDeclarationId}");
         return response.statusCode() == 409;
     }
 
     @Override
-    public boolean deleteTdTs(int id) {
+    public TdTs deleteDeclaration (int id) {
         Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
-        final Response response = RestAssured.given()
+        return RestAssured.given()
             .when()
-                .pathParam("id", id)
-                .delete("/api/configuration/transport-declarations/{id}");
-        return response.statusCode() == 204;
+                .pathParam("transportDeclarationId", id)
+                .post("/api/configuration/transport-declarations/{transportDeclarationId}/deactivate")
+            .then()
+                .log().all()
+                .statusCode(200)
+                .extract().as(TdTs.class);
+    }
+
+    @Override
+    public TdTs recoveryDeclaration(int id) {
+        Specifications.setupRequestSpecification (Specifications.requestSpecification(Constant.BASE_URL, TestBase.token));
+        return RestAssured.given()
+            .when()
+                .pathParam("transportDeclarationId", id)
+                .post("/api/configuration/transport-declarations/{transportDeclarationId}/activate")
+            .then()
+                .log().all()
+                .statusCode(200)
+                .extract().as(TdTs.class);
+
     }
 }
 

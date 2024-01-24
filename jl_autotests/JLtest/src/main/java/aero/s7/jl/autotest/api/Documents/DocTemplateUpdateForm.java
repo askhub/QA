@@ -17,8 +17,8 @@ public class DocTemplateUpdateForm extends DocumentsPackingBaseForm {
         form.setId(id);
         form.setName("обновленный документ");
         form.setDescription("описание документа после обновления");
-        form.setWhitePage(true);
-        form.setReplaceWhitePage(false);
+        form.setIsWhitePage(true);
+        form.setIsReplaceWhitePage(false);
         form.setValidityPeriodStart("2023-10-12T05:01:55.135Z");
 
         return form;
@@ -30,8 +30,8 @@ public class DocTemplateUpdateForm extends DocumentsPackingBaseForm {
         form.setId(id);
         form.setName("update doc");
         form.setDescription("документа после обновления");
-        form.setWhitePage(true);
-        form.setReplaceWhitePage(false);
+        form.setIsWhitePage(true);
+        form.setIsReplaceWhitePage(false);
         form.setValidityPeriodStart("2023-10-10T05:01:55.135Z");
 
         return form;

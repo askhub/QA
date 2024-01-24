@@ -27,7 +27,7 @@ public class DocpackingManager {
         WebElement txtFrm = this.driver.findElement(By.xpath(formXpath));
         txtFrm.click();
         txtFrm.sendKeys(enterText);
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void pushButton(final String buttonTitle) {
@@ -38,18 +38,17 @@ public class DocpackingManager {
             buttonXpath = String.format("//button//span[contains(text(), '%s')]", buttonTitle);
         }
         this.driver.findElement(By.xpath(buttonXpath)).click();
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
+    }
+
+    public void pushSaveRuleButton () {
+        String buttonXpath = "//h2[text()='Edit rule']/..//button//span[contains(text(), 'Save')]";
+        this.driver.findElement(By.xpath(buttonXpath)).click();
     }
 
     public void addDocument() {
         String buttonXpath = "//div[contains(text(), 'Documents')]/../button";
         this.driver.findElement(By.xpath(buttonXpath)).click();
-    }
-
-    public void selector (final String selectorTitle) {
-        //String selectXpath = String.format("//tui-radio-block[@item='%s']", selectorTitle);
-        String selectXpath = String.format("//div[contains(text(),'%s')]/parent::div[@class='t-label']", selectorTitle);
-        Helper.wait(500);
-        this.driver.findElement(By.xpath(selectXpath)).click();
     }
 
     public void dateSearch (final String dateTitle, final String dateSeq, final String date) {
@@ -63,11 +62,11 @@ public class DocpackingManager {
         WebElement dateFrm = this.driver.findElement(By.xpath(dateXpath));
         dateFrm.click();
         dateFrm.sendKeys(date);
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
         String dataCaldrXpath;
         dataCaldrXpath = String.format("(//div[@class='ng-star-inserted']//div[@class='t-item'])[%s]", date.substring(0, 2));
         this.driver.findElement(By.xpath(dataCaldrXpath)).click();
-        //Helper.wait(500);
+        //Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void clickCheckBox(final String chkBoxTitle) {
@@ -82,7 +81,7 @@ public class DocpackingManager {
 
     public void listBox (final String listTitle, final String listValue) {
         String listTitleXpath;
-        if (List.of("Country", "Route category", "Aircraft", "Crew", "Board", "Carrier", "Dep country", "Arr country").contains(listTitle)) {
+        if (List.of("Country", "Route category", "Aircraft", "Board", "Carrier", "Dep country", "Arr country").contains(listTitle)) {
             listTitleXpath = String.format("//label[@tuilabel='%s']" +
                     "//input[@automation-id='tui-primitive-textfield__native-input']", listTitle);
         }
@@ -91,9 +90,9 @@ public class DocpackingManager {
         }
         WebElement field = this.driver.findElement(By.xpath(listTitleXpath));
         field.click();
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
         String listValueXpath;
-        if (List.of("Dep airport", "Arr airport").contains(listTitle)) {
+        if (List.of("Dep airport", "Arr airport", "Airport").contains(listTitle)) {
             field.sendKeys(listValue);
             listValueXpath = String.format("//span[text()='%s']", listValue);
         } else {
@@ -108,14 +107,14 @@ public class DocpackingManager {
             action.perform();
         }
         value.click();
-        //Helper.wait(500);
+        //Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void listOwnerSearch (final String[] department) {
         //String ownerXpath = "//label[@tuilabel='Owner']//input[@automation-id='tui-input-tag__native']";
         String ownerXpath = "//label[@tuilabel='Owner']//div[@class='t-icons t-icon-wrapper ng-star-inserted']";
         this.driver.findElement(By.xpath(ownerXpath)).click();
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
         for (String s : department) {
             String ownerListXpath = switch (s) {
                 /*case "ЛД" -> "//button[@type='button']//tui-multi-select-option[contains(text(), 'ЛД')]";
@@ -138,13 +137,13 @@ public class DocpackingManager {
         }
         String closeListXpath = "//label[@tuilabel='Owner']//*[@automation-id='tui-multi-select__arrow']";
         this.driver.findElement(By.xpath(closeListXpath)).click();
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void listOwnerForm (final String[] department) {
         String ownerXpath = "//tui-multi-select[@formcontrolname='docOwnerIds']";
         this.driver.findElement(By.xpath(ownerXpath)).click();
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
         for (String s : department) {
             String ownerListXpath = switch (s) {
                 case "ЛД" -> "//button[@type='button']//tui-multi-select-option[contains(text(), 'ЛД')]";
@@ -159,10 +158,18 @@ public class DocpackingManager {
             };
         this.driver.findElement(By.xpath(ownerListXpath)).click();
         }
-        String closeListXpath = "//div[text()='Owner']/../following-sibling::div" +
-                "//*[@automation-id='tui-multi-select__arrow']";
+        String closeListXpath = "//div[text()='Owner']/..//div[@class='t-icon t-textfield-icon ng-star-inserted']";
         this.driver.findElement(By.xpath(closeListXpath)).click();
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
+    }
+
+    public void listDocTypeForm (final String docType) {
+        String listDocTypeXpath = "//div[text()='Type']/..//div[@automation-id='tui-primitive-textfield__wrapper']/input";
+        String docTypeValueXpath = String.format(
+                "//span[@class='t-content ng-star-inserted'][text()=' %s ']", docType);
+        this.driver.findElement(By.xpath(listDocTypeXpath)).click();
+        this.driver.findElement(By.xpath(docTypeValueXpath)).click();
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void listCrewForm (final String crewType) {
@@ -171,14 +178,14 @@ public class DocpackingManager {
         docCrewXpath = String.format("//button[@type='button']//span[text()=' %s ']", crewType);
         this.driver.findElement(By.xpath(listCrewXpath)).click();
         this.driver.findElement(By.xpath(docCrewXpath)).click();
-        Helper.wait(1000);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void fileLoad (final String fileName) {
         File file = new File("src/main/resources/static_docs/" + fileName);
         String absolutePath = file.getAbsolutePath();
         this.driver.findElement(By.xpath("//input[@type='file']")).sendKeys(absolutePath);
-        Helper.wait(2000);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
     }
 
     // если нужно изменить DOC NAME, подставленный по имени файла
@@ -193,7 +200,7 @@ public class DocpackingManager {
         WebElement descFld = this.driver.findElement(By.xpath("//textarea[@automation-id='tui-text-area__native']"));
         descFld.click();
         descFld.sendKeys(docDescription);
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void dateValid (final String valid, final String date) {
@@ -203,9 +210,9 @@ public class DocpackingManager {
                     "//*[@automation-id='tui-primitive-textfield__native-input']";
             //WebElement validFrom;
             this.driver.findElement(By.xpath(dateXpath)).clear();
-            Helper.wait(500);
+            Helper.wait(Constant.Ui.SHORT_PAUSE);
             this.driver.findElement(By.xpath(dateXpath)).click();
-            Helper.wait(500);
+            Helper.wait(Constant.Ui.SHORT_PAUSE);
             this.driver.findElement(By.xpath(dateXpath)).sendKeys(date);
         }
         else if (valid.equals("Valid to")){
@@ -213,20 +220,20 @@ public class DocpackingManager {
                     "//input[@automation-id='tui-primitive-textfield__native-input']";
             WebElement validTo = this.driver.findElement(By.xpath(dateXpath));
             validTo.click();
-            Helper.wait(500);
+            Helper.wait(Constant.Ui.SHORT_PAUSE);
             validTo.sendKeys(date);
         }
         String dataCaldrXpath;
         dataCaldrXpath = String.format("(//div[@class='ng-star-inserted']" +
                 "//div[@class='t-item'])[%s]", date.substring(0, 2));
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
         this.driver.findElement(By.xpath(dataCaldrXpath)).click();
-        //Helper.wait(1000);
+        //Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void checkBoxWhitePage () {
         this.driver.findElement(By.xpath("//div[@class='form-input']//input[@type='checkbox']")).click();
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void copiesDocRule (final String quantity) {
@@ -234,7 +241,7 @@ public class DocpackingManager {
         WebElement txtFrm = this.driver.findElement(By.xpath(formXpath));
         txtFrm.click();
         txtFrm.sendKeys(quantity);
-        Helper.wait(500);
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public void markCategoryPasteAfter (final String categoryName) {
@@ -259,7 +266,7 @@ public class DocpackingManager {
 
     public int searchDocResult() {
         int result = 0;
-        Helper.wait(2000);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
         try {
             final String messageXpath = "//div[@class='tui-space_left-5 search-result ng-star-inserted']";
             String qty = this.driver.findElement(By.xpath(messageXpath)).getText();
@@ -272,7 +279,7 @@ public class DocpackingManager {
     }
 
     public int searchDocByOneField (final String request) {
-        Helper.wait(2000);
+        Helper.wait(Constant.Ui.MIDDLE_PAUSE);
         List<WebElement> docList;
         int docFound = 0;
         int count = 1;
@@ -283,7 +290,7 @@ public class DocpackingManager {
             if (isPresent) {
                 final String searchXpath = String.format("//td[contains(text(),'%s')]/following-sibling::" +
                         "td[@class='ng-star-inserted']//button[@title='View']", request);
-                Helper.wait(500);
+                Helper.wait(Constant.Ui.SHORT_PAUSE);
                 docList = this.driver.findElements(By.xpath(searchXpath));
                 docFound = docFound + docList.size();
                 String nextPage = "//button[@automation-id='tui-pagination__element']" +
@@ -309,7 +316,7 @@ public class DocpackingManager {
             Boolean isPresent = this.driver.findElements(By.xpath(pagination)).size() > 0;
             if (isPresent.equals(true)) {
                 final String searchXpath = searchRequestXpath(Constant.Ui.SEARCH_DOC_OWNER);
-                Helper.wait(500);
+                Helper.wait(Constant.Ui.SHORT_PAUSE);
                 docList = this.driver.findElements(By.xpath(searchXpath));
                 docFound = docFound + docList.size();
                 String nextPage = "//button[@automation-id='tui-pagination__element']" +
@@ -321,6 +328,60 @@ public class DocpackingManager {
                 }
             }
         } while (Objects.equals(isNextPagePresent, true));
+        return docFound;
+    }
+
+    public int searchDocByType (final String searchRequest) {
+        final String staticTypeIconTagName = "tuiIconFile";
+        final String dynamicTypeIconTagName = "tuiIconFileText";
+        int staticDocFound = 0;
+        int dynamicDocFound = 0;
+        int docFound = 0;
+        int count = 1;
+        Boolean isNextPagePresent = false;
+        int pageSize = Integer.parseInt(this.driver.findElement(By.xpath(
+                "//div[@class='pagination-actions']//input[@automation-id='tui-primitive-textfield__native-input']"))
+                .getAttribute("value"));
+        do {
+            String pagination = "//button[@automation-id='tui-pagination__element']" +
+                    "//span[text()=' " + count + " ']";
+            Boolean isPresent = this.driver.findElements(By.xpath(pagination)).size() > 0;
+            if (isPresent.equals(true)) {
+                for(int i = 1; i <= pageSize; i++) {
+                     final String iconTypeXpath = String.format("(//tr/td[1]//*[name()='use'])[%d]", i);
+                     Boolean isExist = this.driver.findElements(By.xpath(iconTypeXpath)).size() > 0;
+                     if(isExist.equals(true)) {
+                         final String iconNameXpath = this.driver.findElement(By.xpath(iconTypeXpath))
+                                 .getAttribute("xlink:href");
+                         String[] tagName = iconNameXpath.split("#");
+                         final String iconName = tagName[tagName.length - 1];
+                         if (searchRequest.equals("STATIC")) {
+                             if (iconName.equals(staticTypeIconTagName))
+                                 staticDocFound = staticDocFound + 1;
+                         } else if (searchRequest.equals("DYNAMIC")) {
+                             if (iconName.equals(dynamicTypeIconTagName))
+                                 dynamicDocFound = dynamicDocFound + 1;
+                         }
+                     } else {
+                         break;
+                     }
+                 }
+                String nextPage = "//button[@automation-id='tui-pagination__element']" +
+                                 "//span[text()=' " + (count + 1) + " ']";
+                isNextPagePresent = this.driver.findElements(By.xpath(nextPage)).size() > 0;
+                if (isNextPagePresent.equals(true)) {
+                     this.driver.findElement(By.xpath(nextPage)).click();
+                     count++;
+                } else {
+                    break;
+                }
+            }
+        } while (Objects.equals(isNextPagePresent, true));
+        if(searchRequest.equals("STATIC")) {
+            docFound = staticDocFound;
+        } else if (searchRequest.equals("DYNAMIC")) {
+            docFound = dynamicDocFound;
+        }
         return docFound;
     }
 
@@ -362,7 +423,7 @@ public class DocpackingManager {
             String pagination = "//button[@automation-id='tui-pagination__element']//span[text()=' " + count + " ']";
             Boolean isPresent = this.driver.findElements(By.xpath(pagination)).size() > 0;
             if (isPresent.equals(true)) {
-                Helper.wait(500);
+                Helper.wait(Constant.Ui.SHORT_PAUSE);
                 docList = this.driver.findElements(By.cssSelector("tr[class='not-active ng-star-inserted']"));
                 docFound = docFound + docList.size();
                 String nextPage = "//button[@automation-id='tui-pagination__element']" +
@@ -387,7 +448,6 @@ public class DocpackingManager {
             boolean isPresent = this.driver.findElements(By.xpath(pagination)).size() > 0;
             if (isPresent) {
                 final String searchXpath = String.format("//tr[td[contains(text(),'%s')] and td[contains(text(),'%s')]]//button[@title='View']//span[@class='t-content']", first, second);
-                Helper.wait(500);
                 docList = this.driver.findElements(By.xpath(searchXpath));
                 docFound = docFound + docList.size();
                 String nextPage = "//button[@automation-id='tui-pagination__element']" +
@@ -402,25 +462,24 @@ public class DocpackingManager {
         return docFound;
     }
 
-    public int searchDocByDocRuleField (final String field, final String value) {
+    public int searchDocByDocRuleField (final String searchField, final String searchRequest) {
 
         int page = 1;
         int count = 0;
         boolean isNextPagePresent = false;
         do {
-            Helper.wait(1000);
             String viewIcon = "//button[@title='View']//span[@class='t-content']";
             for (int i = 1; i <= this.driver.findElements(By.xpath(viewIcon)).size(); i++) {
                 this.driver.findElement(By.xpath("(" + viewIcon + ")[" + i + "]")).click();
-                Helper.wait(3000);
+                Helper.wait(Constant.Ui.MIDDLE_PAUSE);
 
-                final String xPath = switch (field) {
+                final String xPath = switch (searchField) {
                     case "Flight type" -> "//label[@tuilabel='Flight type']//span[@class='t-content']";
                     case "Country" ->
                             "//label[@tuilabel='Dep country' or @tuilabel='Arr country']//span[@class='t-content']";
                     case "Airport" ->
                             "//label[@tuilabel='Dep airport' or @tuilabel='Arr airport']//span[@class='t-content']";
-                    case "Flight number" -> " //label[@tuilabel='Flight number']//span[@class='t-content']";
+                    case "Flight number" -> "//label[@tuilabel='Flight number']//span[@class='t-content']";
                     case "Crew" -> "//label[@tuilabel='Crew']//span[@class='t-content']";
                     case "Route category" -> "//label[@tuilabel='Route category']//span[@class='t-content']";
                     case "Tech stop" -> "//label[@tuilabel='Technical stop']//*[@class='t-content']";
@@ -430,7 +489,7 @@ public class DocpackingManager {
                 for (int j = 1; j <= this.driver.findElements(By.xpath(xPath)).size(); j++) {
                     String ruleXpath = "(" + xPath + ")[" + j + "]";
                     String actualValue = this.driver.findElement(By.xpath(ruleXpath)).getText();
-                    if (actualValue.equals(value)) {
+                    if (actualValue.equals(searchRequest)) {
                         count++;
                         break;
                     }
@@ -530,13 +589,13 @@ public class DocpackingManager {
         List<LocalDate> documentsList = new ArrayList<>();
         for (int i = 1; i <= quantity; i++) {
             this.driver.findElement(By.xpath(
-                    String.format("//button[@title='View']//span[@class='t-content'][%s]", i))).click();
-
-            String createDateXpath = "//div[text()='Created']/../following-sibling::div//span[@automation-id='tui-tag__text']";
+                    String.format("(//button[@title='View']//span[@class='t-content'])[%s]", i))).click();
+            Helper.wait(Constant.Ui.LONG_PAUSE);
+            String createDateXpath = "//div[text()='Modify at']/following-sibling::div[@class='form-input']";
             String dateText = this.driver.findElement(By.xpath(createDateXpath)).getText();
             String[] array = dateText.split(" ");
             String createDate = array[0];
-
+            System.out.println(createDate);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.M.yyyy");
             LocalDate date = LocalDate.parse(createDate, formatter);
             documentsList.add(date);
@@ -546,17 +605,12 @@ public class DocpackingManager {
         LocalDate date2 = LocalDate.parse(dateFrom, formatter2);
         int count = 0;
         for (LocalDate date : documentsList) {
-            if (date.isAfter(date2)) {
+            if (date.isEqual(date2) || date.isAfter(date2)) {
                 count++;
-                break;
+                System.out.println(count);;
             }
         }
         return count;
-    }
-
-    public LocalDate parserDate(final String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        return LocalDate.parse(date, formatter);
     }
 
     public String getCalendarValue (String dateTitle, String dateSeq) {
@@ -574,49 +628,21 @@ public class DocpackingManager {
                     "(//label[@tuilabel='%s']//input[@automation-id='tui-primitive-textfield__native-input'])[2]",
                     dateTitle);
         } else if (dateTitle.equals("Valid") & dateSeq.equals("From")) {
-            dateXpath = "(//input[@automation-id='tui-primitive-textfield__native-input'])[2]";
-        } else if (dateTitle.equals("Valid") & dateSeq.equals("To")) {
             dateXpath = "(//input[@automation-id='tui-primitive-textfield__native-input'])[3]";
+        } else if (dateTitle.equals("Valid") & dateSeq.equals("To")) {
+            dateXpath = "(//input[@automation-id='tui-primitive-textfield__native-input'])[4]";
         }
         return this.driver.findElement(By.xpath(dateXpath)).getAttribute("value");
     }
 
-    public void cleanDateForm (final String title) {
-        String dateXpath;
-        if (title.equals("Valid from")) {
-            dateXpath = "(//span[@automation-id='tui-primitive-textfield__cleaner'])[1]";
-        } else {
-            dateXpath = "(//span[@automation-id='tui-primitive-textfield__cleaner'])[2]";
-        }
-        this.driver.findElement(By.xpath(dateXpath)).click();
-    }
-
     public String getDocumentCreator () {
-        String authorXpath = "//div[text()='Author']/../following-sibling::div//span[@automation-id='tui-tag__text']";
+        String authorXpath = "//div[text()='Modify by']/../div[@class='form-input']";
         WebElement author = this.driver.findElement(By.xpath(authorXpath));
         return author.getText();
     }
 }
 
 /*
-public void markPasteAfter (String nameCat,String nameDoc) {
-        String parentXpath = String.format("//label[text()='%s']/../../following-sibling::button", nameCat);
-        Boolean isPresent = driver.findElements(By.xpath(parentXpath)).size() > 0;
-        String pasteDocXpath;
-        if (isPresent.equals(true)) {
-            // есть дочерние элементы
-            this.driver.findElement(By.xpath(parentXpath)).click();
-            pasteDocXpath = String.format("//div[contains(text(),' %s ')]", nameDoc);
-        } else {
-            // нет дочерних элементов
-            pasteDocXpath = String.format("//div[contains(text(),' %s ')]", nameCat);
-        }
-        this.driver.findElement(By.xpath(pasteDocXpath)).click();
-        Helper.wait(1000);
-    }
-    //label[text()='Основные документы']/preceding-sibling::div[@class='mdc-radio'] - для выбора категорий в paste after
-    //div[contains(text(),' Памятка_Кипр ')]/../../preceding-sibling::div[@class='mdc-radio'] - для выбора документов в paste after
-
  public String getCalendarValue (String dateTitle, String dateSeq) {
         String title = dateTitle + " " + dateSeq;
         String dateXpath =

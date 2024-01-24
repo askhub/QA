@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TdTsCreateForm {
     @JsonProperty("catering_number")
-    private final String cateringDeclNumber;
+    private final String cateringNumber;
 
     @JsonProperty("end_date")
     private final String dateEnd;
@@ -13,17 +13,17 @@ public class TdTsCreateForm {
     private final String dateStart;
 
     @JsonProperty("fuel_number")
-    private final String fuelDeclNumber;
+    private final String fuelNumber;
 
     public TdTsCreateForm(TdTsCreateFormBuilder tdTsCreateFormBuilder) {
-        cateringDeclNumber = tdTsCreateFormBuilder.cateringDeclNumber;
+        cateringNumber = tdTsCreateFormBuilder.cateringNumber;
         dateEnd = tdTsCreateFormBuilder.dateEnd;
         dateStart = tdTsCreateFormBuilder.dateStart;
-        fuelDeclNumber = tdTsCreateFormBuilder.fuelDeclNumber;
+        fuelNumber = tdTsCreateFormBuilder.fuelNumber;
     }
 
-    public String getCateringDeclNumber() {
-        return cateringDeclNumber;
+    public String getCateringNumber() {
+        return cateringNumber;
     }
     public String getDateEnd() {
         return dateEnd;
@@ -31,7 +31,7 @@ public class TdTsCreateForm {
     public String getDateStart() {
         return dateStart;
     }
-    public String getFuelDeclNumber() {
-        return fuelDeclNumber;
+    public String getFuelNumber() {
+        return fuelNumber;
     }
 }

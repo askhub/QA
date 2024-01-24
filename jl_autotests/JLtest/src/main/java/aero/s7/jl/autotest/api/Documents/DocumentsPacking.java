@@ -13,9 +13,8 @@ public class DocumentsPacking {
     private int prevDocId;
     private String validityPeriodEnd; //"2023-07-21T05:01:55.135Z"
     private String validityPeriodStart;
-    private boolean whitePage;
-    private boolean replaceWhitePage;
-
+    private boolean isWhitePage;
+    private boolean isReplaceWhitePage;
 
     private String authorFullName;
     private int authorId;
@@ -35,7 +34,6 @@ public class DocumentsPacking {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -43,7 +41,6 @@ public class DocumentsPacking {
     public int getDocCategoryId() {
         return docCategoryId;
     }
-
     public void setDocCategoryId(int docCategoryId) {
         this.docCategoryId = docCategoryId;
     }
@@ -51,7 +48,6 @@ public class DocumentsPacking {
     public int getDocFileId() {
         return docFileId;
     }
-
     public void setDocFileId(int docFileId) {
         this.docFileId = docFileId;
     }
@@ -59,7 +55,6 @@ public class DocumentsPacking {
     public List<Integer> getDocOwnerIds() {
         return docOwnerIds;
     }
-
     public void setDocOwnerIds(List<Integer> docOwnerIds) {
         this.docOwnerIds = docOwnerIds;
     }
@@ -67,7 +62,6 @@ public class DocumentsPacking {
     public String getDocType() {
         return docType;
     }
-
     public void setDocType(String docType) {
         this.docType = docType;
     }
@@ -75,7 +69,6 @@ public class DocumentsPacking {
     public boolean getIsActive() {
         return isActive;
     }
-
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
@@ -83,7 +76,6 @@ public class DocumentsPacking {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -91,7 +83,6 @@ public class DocumentsPacking {
     public int getPrevDocId() {
         return prevDocId;
     }
-
     public void setPrevDocId(int prevDocId) {
         this.prevDocId = prevDocId;
     }
@@ -99,7 +90,6 @@ public class DocumentsPacking {
     public String getValidityPeriodEnd() {
         return validityPeriodEnd;
     }
-
     public void setValidityPeriodEnd(String validityPeriodEnd) {
         this.validityPeriodEnd = validityPeriodEnd;
     }
@@ -107,31 +97,27 @@ public class DocumentsPacking {
     public String getValidityPeriodStart() {
         return validityPeriodStart;
     }
-
     public void setValidityPeriodStart(String validityPeriodStart) {
         this.validityPeriodStart = validityPeriodStart;
     }
 
-    public boolean getWhitePage() {
-        return whitePage;
+    public boolean getIsWhitePage() {
+        return isWhitePage;
+    }
+    public void setIsWhitePage(boolean isWhitePage) {
+        this.isWhitePage = isWhitePage;
     }
 
-    public void setWhitePage(boolean whitePage) {
-        this.whitePage = whitePage;
+    public boolean getIsReplaceWhitePage() {
+        return isReplaceWhitePage;
     }
-
-    public boolean replaceWhitePage() {
-        return replaceWhitePage;
-    }
-
-    public void setReplaceWhitePage(boolean replaceWhitePage) {
-        this.replaceWhitePage = replaceWhitePage;
+    public void setIsReplaceWhitePage(boolean isReplaceWhitePage) {
+        this.isReplaceWhitePage = isReplaceWhitePage;
     }
 
     public String getAuthorFullName() {
         return authorFullName;
     }
-
     public void setAuthorFullName(String authorFullName) {
         this.authorFullName = authorFullName;
     }
@@ -139,7 +125,6 @@ public class DocumentsPacking {
     public int getAuthorId() {
         return authorId;
     }
-
     public void setAuthorId(int authorId) {
         this.authorId = authorId;
     }
@@ -147,7 +132,6 @@ public class DocumentsPacking {
     public String getAuthorName() {
         return authorName;
     }
-
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
     }
@@ -155,7 +139,6 @@ public class DocumentsPacking {
     public String getCreateDate() {
         return createDate;
     }
-
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
@@ -163,7 +146,6 @@ public class DocumentsPacking {
     public List<Integer> getDocRulesIds() {
         return docRulesIds;
     }
-
     public void setDocRulesIds(List<Integer> docRulesIds) {
         this.docRulesIds = docRulesIds;
     }
@@ -171,7 +153,6 @@ public class DocumentsPacking {
     public List<Integer> getDocTemplateParamsIds() {
         return docTemplateParamsIds;
     }
-
     public void setDocTemplateParamsIds(List<Integer> docTemplateParamsIds) {
         this.docTemplateParamsIds = docTemplateParamsIds;
     }
@@ -179,7 +160,6 @@ public class DocumentsPacking {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -187,7 +167,6 @@ public class DocumentsPacking {
     public String getModifyAuthorFullName() {
         return modifyAuthorFullName;
     }
-
     public void setModifyAuthorFullName(String modifyAuthorFullName) {
         this.modifyAuthorFullName = modifyAuthorFullName;
     }
@@ -195,7 +174,6 @@ public class DocumentsPacking {
     public int getModifyAuthorId() {
         return modifyAuthorId;
     }
-
     public void setModifyAuthorId(int modifyAuthorId) {
         this.modifyAuthorId = modifyAuthorId;
     }
@@ -203,7 +181,6 @@ public class DocumentsPacking {
     public String getModifyDate() {
         return modifyDate;
     }
-
     public void setModifyDate(String modifyDate) {
         this.modifyDate = modifyDate;
     }
@@ -211,7 +188,6 @@ public class DocumentsPacking {
     public int getSortIndex() {
         return sortIndex;
     }
-
     public void setSortIndex(int sortIndex) {
         this.sortIndex = sortIndex;
     }

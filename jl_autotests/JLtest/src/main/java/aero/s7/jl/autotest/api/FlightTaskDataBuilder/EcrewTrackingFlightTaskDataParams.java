@@ -1,6 +1,6 @@
 package aero.s7.jl.autotest.api.FlightTaskDataBuilder;
-
 import org.junit.Assert;
+
 
 public class EcrewTrackingFlightTaskDataParams {
 

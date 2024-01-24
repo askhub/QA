@@ -2,19 +2,19 @@ package aero.s7.jl.autotest.api.Administration;
 
 public class TdTsCreateFormBuilder {
 
-    String cateringDeclNumber;
+    String cateringNumber;
     String dateEnd;
     String dateStart;
-    String fuelDeclNumber;
+    String fuelNumber;
 
-    public TdTsCreateFormBuilder (String dateStart, String dateEnd, String fuelDeclNumber) {
+    public TdTsCreateFormBuilder (String dateStart, String dateEnd, String fuelNumber) {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
-        this.fuelDeclNumber = fuelDeclNumber;
+        this.fuelNumber = fuelNumber;
     }
 
-    public TdTsCreateFormBuilder setCateringDeclNumber (String cateringDeclNumber) {
-        this.cateringDeclNumber = cateringDeclNumber;
+    public TdTsCreateFormBuilder setCateringNumber (String cateringNumber) {
+        this.cateringNumber = cateringNumber;
         return this;
     }
 

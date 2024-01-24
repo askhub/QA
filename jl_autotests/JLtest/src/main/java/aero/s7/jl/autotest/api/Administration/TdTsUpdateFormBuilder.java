@@ -1,17 +1,17 @@
 package aero.s7.jl.autotest.api.Administration;
 
 public class TdTsUpdateFormBuilder {
-    String cateringDeclNumber;
+    String cateringNumber;
     String dateEnd;
     String dateStart;
-    String fuelDeclNumber;
+    String fuelNumber;
     boolean isActive;
 
     public TdTsUpdateFormBuilder () {
     }
 
-    public TdTsUpdateFormBuilder setCateringDeclNumber (String cateringDeclNumber) {
-        this.cateringDeclNumber = cateringDeclNumber;
+    public TdTsUpdateFormBuilder setCateringNumber(String cateringNumber) {
+        this.cateringNumber = cateringNumber;
         return this;
     }
 
@@ -30,8 +30,8 @@ public class TdTsUpdateFormBuilder {
         return this;
     }
 
-    public TdTsUpdateFormBuilder setFuelDeclNumber (String fuelDeclNumber) {
-        this.fuelDeclNumber = fuelDeclNumber;
+    public TdTsUpdateFormBuilder setFuelNumber(String fuelNumber) {
+        this.fuelNumber = fuelNumber;
         return this;
     }
 

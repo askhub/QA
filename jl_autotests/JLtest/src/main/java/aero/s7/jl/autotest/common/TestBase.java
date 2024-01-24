@@ -20,7 +20,7 @@ public class TestBase {
     public static void setupChrome() {
         driver = new DriverCore(DriverType.CHROME);
         //driver.getDriver().manage().window().maximize();
-        driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.getDriver().get(Constant.BASE_URL);
         //driver.getDriver().findElement(By.xpath("//*[@id='details-button']")).click();
         //driver.getDriver().findElement(By.xpath("//*[@id='proceed-link']")).click();
@@ -29,7 +29,7 @@ public class TestBase {
         driver.getDriver().findElement(By.xpath("//*[@id='usernameUserInput']"))
                 .sendKeys(Constant.LOGIN_NAME, Keys.TAB, Constant.LOGIN_PASS);
         driver.getDriver().findElement(By.xpath("//*[@class='ui primary large button']")).click();
-        Helper.wait(7000);
+        Helper.wait(Constant.Ui.LONG_PAUSE);
         token = authToken();
         System.out.println(token);
     }
@@ -40,11 +40,10 @@ public class TestBase {
     }
 
     public static void headerLink(String chapter) {
-        //Helper.wait(1000);
         String chapterXpath = String.format("//button//span[contains(text(), '%s')]", chapter);
         driver.getDriver().findElement(By.xpath(chapterXpath)).click();
-        driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        Helper.wait(1000);
+        driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        Helper.wait(Constant.Ui.SHORT_PAUSE);
     }
 
     public static String authToken() {
@@ -54,7 +53,6 @@ public class TestBase {
     }
 
     public static boolean isChapterPresent(String chapterTitle) {
-        //Helper.wait(500);
         String checkingXpath = String.format("//button[@class='_active']//span[contains(text(), '%s')]", chapterTitle);
         Boolean isPresent;
         isPresent = driver.getDriver().findElements(By.xpath(checkingXpath)).size() == 1;
